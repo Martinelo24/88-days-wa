@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "setup:db": "node scripts/setupDatabase.js",
-    "dev": "node server.js",
-    "start": "node server.js"
+    "dev": "nodemon server.js",
+    "start": "node server.js",
+    "browse": "open http://localhost:3000 && node server.js"
   },
   "keywords": ["88days", "western-australia", "backpackers", "jobs"],
   "author": "",

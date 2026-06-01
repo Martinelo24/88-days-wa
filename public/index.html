@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>88 Days WA - Database Browser</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      overflow: hidden;
+    }
+
+    header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 40px 30px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 0.95em;
+      opacity: 0.9;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+      padding: 20px 30px;
+      background: #f8f9fa;
+      border-bottom: 1px solid #e9ecef;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 2em;
+      font-weight: bold;
+      color: #667eea;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.85em;
+      color: #666;
+      margin-top: 5px;
+    }
+
+    .tabs {
+      display: flex;
+      border-bottom: 2px solid #e9ecef;
+      background: white;
+    }
+
+    .tab-button {
+      flex: 1;
+      padding: 15px 20px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1em;
+      font-weight: 500;
+      color: #666;
+      transition: all 0.3s ease;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+    }
+
+    .tab-button:hover {
+      color: #667eea;
+      background: #f8f9fa;
+    }
+
+    .tab-button.active {
+      color: #667eea;
+      border-bottom-color: #667eea;
+    }
+
+    .content {
+      padding: 30px;
+      min-height: 400px;
+    }
+
+    .tab-pane {
+      display: none;
+    }
+
+    .tab-pane.active {
+      display: block;
+    }
+
+    .search-box {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .search-box input,
+    .search-box select {
+      flex: 1;
+      padding: 10px 15px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 0.95em;
+    }
+
+    .search-box button {
+      padding: 10px 20px;
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background 0.3s ease;
+    }
+
+    .search-box button:hover {
+      background: #5568d3;
+    }
+
+    .results-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .result-item {
+      padding: 15px;
+      border: 1px solid #e9ecef;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: #f8f9fa;
+    }
+
+    .result-item:hover {
+      background: white;
+      border-color: #667eea;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
+      transform: translateX(4px);
+    }
+
+    .result-item h3 {
+      color: #333;
+      margin-bottom: 5px;
+    }
+
+    .result-item p {
+      color: #666;
+      font-size: 0.9em;
+      margin: 3px 0;
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 30px;
+      align-items: center;
+    }
+
+    .pagination button {
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .pagination button:hover:not(:disabled) {
+      background: #667eea;
+      color: white;
+      border-color: #667eea;
+    }
+
+    .pagination button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .pagination-info {
+      color: #666;
+      font-size: 0.9em;
+      margin: 0 10px;
+    }
+
+    .detail-view {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+    }
+
+    .detail-view h2 {
+      color: #333;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      background: #667eea;
+      color: white;
+      border-radius: 12px;
+      font-size: 0.8em;
+      font-weight: 500;
+    }
+
+    .badge.secondary {
+      background: #6c757d;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .detail-item {
+      background: white;
+      padding: 12px;
+      border-radius: 4px;
+    }
+
+    .detail-label {
+      color: #666;
+      font-size: 0.85em;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    .detail-value {
+      color: #333;
+      font-weight: 500;
+      word-break: break-word;
+    }
+
+    .back-button {
+      display: inline-block;
+      padding: 8px 15px;
+      background: #667eea;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-bottom: 20px;
+      font-size: 0.9em;
+      text-decoration: none;
+      border: none;
+      transition: background 0.3s ease;
+    }
+
+    .back-button:hover {
+      background: #5568d3;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: #999;
+    }
+
+    .empty-state p {
+      font-size: 1.1em;
+      margin-bottom: 10px;
+    }
+
+    .businesses-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .businesses-table th {
+      background: #f8f9fa;
+      padding: 12px;
+      text-align: left;
+      font-weight: 600;
+      color: #333;
+      border-bottom: 2px solid #e9ecef;
+    }
+
+    .businesses-table td {
+      padding: 12px;
+      border-bottom: 1px solid #e9ecef;
+    }
+
+    .businesses-table tr:hover {
+      background: #f8f9fa;
+    }
+
+    .verified-badge {
+      background: #28a745;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.8em;
+      font-weight: 500;
+    }
+
+    .unverified-badge {
+      background: #ffc107;
+      color: #333;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.8em;
+      font-weight: 500;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 40px 20px;
+      color: #999;
+    }
+
+    .loading::after {
+      content: '';
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid #667eea;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🏢 88 Days WA Database Browser</h1>
+      <p>Click through postcodes, categories, and businesses</p>
+    </header>
+
+    <div class="stats">
+      <div class="stat">
+        <span class="stat-value" id="stat-postcodes">-</span>
+        <span class="stat-label">Postcodes</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value" id="stat-categories">-</span>
+        <span class="stat-label">Categories</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value" id="stat-businesses">-</span>
+        <span class="stat-label">Businesses</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value" id="stat-verified">-</span>
+        <span class="stat-label">Verified</span>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <button class="tab-button active" onclick="switchTab('postcodes')">📍 Postcodes</button>
+      <button class="tab-button" onclick="switchTab('categories')">🏷️ Categories</button>
+      <button class="tab-button" onclick="switchTab('businesses')">🏢 Businesses</button>
+    </div>
+
+    <div class="content">
+      <!-- POSTCODES TAB -->
+      <div id="postcodes" class="tab-pane active">
+        <div class="search-box">
+          <input type="text" id="postcode-search" placeholder="Search by postcode or town..." onkeyup="searchPostcodes()">
+          <button onclick="searchPostcodes()">Search</button>
+        </div>
+        <div id="postcodes-list" class="results-list"></div>
+        <div id="postcodes-pagination" class="pagination"></div>
+      </div>
+
+      <!-- CATEGORIES TAB -->
+      <div id="categories" class="tab-pane">
+        <div id="categories-list" class="results-list"></div>
+      </div>
+
+      <!-- BUSINESSES TAB -->
+      <div id="businesses" class="tab-pane">
+        <div class="search-box">
+          <input type="text" id="business-search" placeholder="Search by business name..." onkeyup="searchBusinesses()">
+          <select id="verified-filter" onchange="searchBusinesses()">
+            <option value="">All Businesses</option>
+            <option value="true">Verified Only</option>
+            <option value="false">Unverified Only</option>
+          </select>
+          <button onclick="searchBusinesses()">Search</button>
+        </div>
+        <div id="businesses-list"></div>
+        <div id="businesses-pagination" class="pagination"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API = 'http://localhost:3000/api';
+
+    // Load initial data
+    document.addEventListener('DOMContentLoaded', () => {
+      loadStats();
+      loadPostcodes();
+      loadCategories();
+    });
+
+    // Load database stats
+    async function loadStats() {
+      try {
+        const res = await fetch(`${API}/stats`);
+        const data = await res.json();
+        document.getElementById('stat-postcodes').textContent = data.postcodes;
+        document.getElementById('stat-categories').textContent = data.categories;
+        document.getElementById('stat-businesses').textContent = data.businesses;
+        document.getElementById('stat-verified').textContent = data.verified_businesses;
+      } catch (e) {
+        console.error('Error loading stats:', e);
+      }
+    }
+
+    // Load postcodes
+    let postcodeState = { page: 1, limit: 20, search: '' };
+
+    async function loadPostcodes() {
+      const { page, limit, search } = postcodeState;
+      try {
+        document.getElementById('postcodes-list').innerHTML = '<div class="loading"></div>';
+        const res = await fetch(`${API}/postcodes?page=${page}&limit=${limit}&search=${search}`);
+        const { data, pagination } = await res.json();
+
+        const html = data.map(p => `
+          <div class="result-item" onclick="showPostcodeDetail('${p.postcode}')">
+            <h3>${p.postcode} - ${p.town}</h3>
+            <p>Region: ${p.region} | Lat: ${p.latitude}, Long: ${p.longitude}</p>
+          </div>
+        `).join('');
+
+        document.getElementById('postcodes-list').innerHTML = html || '<div class="empty-state"><p>No postcodes found</p></div>';
+        updatePagination('postcodes-pagination', pagination, 'loadPostcodes');
+      } catch (e) {
+        console.error('Error:', e);
+        document.getElementById('postcodes-list').innerHTML = '<div class="empty-state"><p>Error loading data</p></div>';
+      }
+    }
+
+    function searchPostcodes() {
+      postcodeState.search = document.getElementById('postcode-search').value;
+      postcodeState.page = 1;
+      loadPostcodes();
+    }
+
+    // Load categories
+    async function loadCategories() {
+      try {
+        const res = await fetch(`${API}/categories`);
+        const { data } = await res.json();
+
+        const html = data.map(c => `
+          <div class="result-item" onclick="showCategoryDetail(${c.id})">
+            <h3>${c.category_name}</h3>
+            <p>Parent: ${c.parent_category}</p>
+            <p>Keywords: ${c.search_keywords.substring(0, 60)}...</p>
+          </div>
+        `).join('');
+
+        document.getElementById('categories-list').innerHTML = html;
+      } catch (e) {
+        console.error('Error:', e);
+      }
+    }
+
+    // Load businesses
+    let businessState = { page: 1, limit: 20, search: '', verified: '' };
+
+    async function loadBusinesses() {
+      const { page, limit, search, verified } = businessState;
+      try {
+        document.getElementById('businesses-list').innerHTML = '<div class="loading"></div>';
+        let url = `${API}/businesses?page=${page}&limit=${limit}`;
+        if (verified) url += `&verified=${verified}`;
+
+        const res = await fetch(url);
+        const { data, pagination } = await res.json();
+
+        if (data.length === 0) {
+          document.getElementById('businesses-list').innerHTML = '<div class="empty-state"><p>No businesses added yet</p><p>Phase 2: Web scraping & verification coming soon!</p></div>';
+        } else {
+          const html = `
+            <table class="businesses-table">
+              <thead>
+                <tr>
+                  <th>Business Name</th>
+                  <th>Town</th>
+                  <th>Category</th>
+                  <th>Website</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${data.map(b => `
+                  <tr>
+                    <td>${b.business_name}</td>
+                    <td>${b.town}</td>
+                    <td>${b.job_category_name || '-'}</td>
+                    <td>${b.website_url ? `<a href="${b.website_url}" target="_blank">Visit</a>` : '-'}</td>
+                    <td>${b.verified ? '<span class="verified-badge">✓ Verified</span>' : '<span class="unverified-badge">⏳ Unverified</span>'}</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          `;
+          document.getElementById('businesses-list').innerHTML = html;
+        }
+        updatePagination('businesses-pagination', pagination, 'loadBusinesses');
+      } catch (e) {
+        console.error('Error:', e);
+      }
+    }
+
+    function searchBusinesses() {
+      businessState.search = document.getElementById('business-search')?.value || '';
+      businessState.verified = document.getElementById('verified-filter')?.value || '';
+      businessState.page = 1;
+      loadBusinesses();
+    }
+
+    // Show detail views
+    async function showPostcodeDetail(postcode) {
+      try {
+        const res = await fetch(`${API}/postcodes/${postcode}`);
+        const { postcode: pc, businesses } = await res.json();
+
+        let html = `
+          <button class="back-button" onclick="loadPostcodes()">← Back</button>
+          <div class="detail-view">
+            <h2>${pc.postcode} - ${pc.town}</h2>
+            <div class="detail-grid">
+              <div class="detail-item">
+                <div class="detail-label">Region</div>
+                <div class="detail-value">${pc.region}</div>
+              </div>
+              <div class="detail-item">
+                <div class="detail-label">State</div>
+                <div class="detail-value">${pc.state}</div>
+              </div>
+              <div class="detail-item">
+                <div class="detail-label">Coordinates</div>
+                <div class="detail-value">${pc.latitude}, ${pc.longitude}</div>
+              </div>
+              <div class="detail-item">
+                <div class="detail-label">88-Day Eligible</div>
+                <div class="detail-value">${pc.eligible_88days ? '✓ Yes' : '✗ No'}</div>
+              </div>
+            </div>
+          </div>
+          <h3>Businesses in ${pc.town} (${businesses.length})</h3>
+        `;
+
+        if (businesses.length === 0) {
+          html += '<div class="empty-state"><p>No businesses added yet for this postcode</p></div>';
+        } else {
+          html += `
+            <table class="businesses-table">
+              <thead>
+                <tr>
+                  <th>Business</th>
+                  <th>Category</th>
+                  <th>Hiring Status</th>
+                  <th>Verified</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${businesses.map(b => `
+                  <tr>
+                    <td>${b.business_name}</td>
+                    <td>${b.job_category_name || '-'}</td>
+                    <td>${b.hiring_status}</td>
+                    <td>${b.verified ? '✓' : '✗'}</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          `;
+        }
+
+        document.getElementById('postcodes').innerHTML = html;
+      } catch (e) {
+        console.error('Error:', e);
+      }
+    }
+
+    async function showCategoryDetail(id) {
+      try {
+        const res = await fetch(`${API}/categories/${id}`);
+        const { category, businesses } = await res.json();
+
+        let html = `
+          <button class="back-button" onclick="loadCategories()">← Back</button>
+          <div class="detail-view">
+            <h2>${category.category_name}</h2>
+            <div class="detail-grid">
+              <div class="detail-item">
+                <div class="detail-label">Parent Category</div>
+                <div class="detail-value">${category.parent_category}</div>
+              </div>
+              <div class="detail-item">
+                <div class="detail-label">Eligible</div>
+                <div class="detail-value">${category.eligible_88days ? '✓ Yes' : '✗ No'}</div>
+              </div>
+              <div class="detail-item">
+                <div class="detail-label">Description</div>
+                <div class="detail-value">${category.description}</div>
+              </div>
+            </div>
+            <div style="margin-top: 15px; background: white; padding: 12px; border-radius: 4px;">
+              <div class="detail-label">Search Keywords</div>
+              <div class="detail-value">${category.search_keywords}</div>
+            </div>
+          </div>
+          <h3>Businesses in this category (${businesses.length})</h3>
+        `;
+
+        if (businesses.length === 0) {
+          html += '<div class="empty-state"><p>No businesses added yet for this category</p></div>';
+        } else {
+          html += `
+            <table class="businesses-table">
+              <thead>
+                <tr>
+                  <th>Business</th>
+                  <th>Town</th>
+                  <th>Verified</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${businesses.map(b => `
+                  <tr>
+                    <td>${b.business_name}</td>
+                    <td>${b.town}</td>
+                    <td>${b.verified ? '✓' : '✗'}</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          `;
+        }
+
+        document.getElementById('categories').innerHTML = html;
+        switchTab('categories');
+      } catch (e) {
+        console.error('Error:', e);
+      }
+    }
+
+    // Tab switching
+    function switchTab(tabName) {
+      document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-button').forEach(el => el.classList.remove('active'));
+
+      document.getElementById(tabName).classList.add('active');
+      event.target.classList.add('active');
+
+      if (tabName === 'businesses' && !document.getElementById('businesses-list').innerHTML) {
+        loadBusinesses();
+      }
+    }
+
+    // Pagination
+    function updatePagination(elementId, pagination, loadFunc) {
+      const { page, totalPages } = pagination;
+      let html = '';
+
+      if (totalPages > 1) {
+        if (page > 1) {
+          html += `<button onclick="${loadFunc}(); document.documentElement.scrollTop = 0;">← Previous</button>`;
+        }
+        html += `<span class="pagination-info">Page ${page} of ${totalPages}</span>`;
+        if (page < totalPages) {
+          html += `<button onclick="${loadFunc}(); document.documentElement.scrollTop = 0;">Next →</button>`;
+        }
+      }
+
+      document.getElementById(elementId).innerHTML = html;
+    }
+
+    // Update pagination handlers
+    document.addEventListener('DOMContentLoaded', () => {
+      window.prevPostcodes = () => {
+        postcodeState.page--;
+        loadPostcodes();
+      };
+      window.nextPostcodes = () => {
+        postcodeState.page++;
+        loadPostcodes();
+      };
+      window.prevBusinesses = () => {
+        businessState.page--;
+        loadBusinesses();
+      };
+      window.nextBusinesses = () => {
+        businessState.page++;
+        loadBusinesses();
+      };
+    });
+  </script>
+</body>
+</html>
