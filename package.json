@@ -1,0 +1,23 @@
+{
+  "name": "88days-wa",
+  "version": "0.1.0",
+  "description": "88-day eligible jobs finder for Western Australia",
+  "main": "index.js",
+  "scripts": {
+    "setup:db": "node scripts/setupDatabase.js",
+    "dev": "node server.js",
+    "start": "node server.js"
+  },
+  "keywords": ["88days", "western-australia", "backpackers", "jobs"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "sqlite3": "^5.1.6",
+    "cors": "^2.8.5",
+    "csv-parse": "^5.4.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

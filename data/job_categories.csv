@@ -1,0 +1,13 @@
+category_id,category_name,parent_category,description,eligible_88days,search_keywords
+1,Fruit Orchard,Agriculture,Apple cherry stone fruit farms,yes,farm|orchard|apple|cherry|peach|pear|plum|apricot|nectarine
+2,Grape Vineyard,Agriculture,Wine and table grape vineyards,yes,vineyard|grape|wine|viticulture|harvest
+3,Vegetable Farm,Agriculture,Row crop and vegetable operations,yes,vegetable|farm|lettuce|potato|onion|carrot|capsicum|broccoli|cabbage
+4,Livestock Farm,Agriculture,Cattle sheep poultry dairy operations,yes,livestock|cattle|sheep|poultry|dairy|farm|station|ranch|feedlot
+5,Nursery & Horticulture,Agriculture,Plant nursery and greenhouse operations,yes,nursery|greenhouse|horticulture|plants|seedlings|propagation
+6,Mining Operation,Mining,Metal and mineral extraction and processing,yes,mining|quarry|excavation|extraction|processing|ore|mineral|underground
+7,Fish Processing,Fishing,Seafood processing and packaging facilities,yes,fish|fishing|seafood|processing|trawler|deckhand|packaging|canning
+8,Regional Construction,Construction,Laboring in regional construction projects,conditional,construction|builder|labor|infrastructure|carpentry|general|hand
+9,Hospitality Remote,Hospitality,Resorts lodges stations in remote areas,conditional,resort|lodge|station|hospitality|remote|accommodation|chef|cook
+10,Disaster Recovery Work,Disaster Recovery,Cleanup and rebuilding in declared disaster areas,yes,disaster|recovery|cleanup|rebuilding|reconstruction|relief
+11,Agricultural Processing,Agriculture,Crop and produce processing facilities,yes,processing|packing|drying|canning|cannery|bottling|packaging
+12,Cotton Picking,Agriculture,Cotton harvest and processing,yes,cotton|picking|harvest|defoliation|harvest
