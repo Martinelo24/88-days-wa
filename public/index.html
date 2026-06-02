@@ -359,6 +359,49 @@
     @keyframes spin {
       to { transform: rotate(360deg); }
     }
+
+    .edit-btn {
+      padding: 7px 14px;
+      background: #fff3cd;
+      border: 1px solid #ffc107;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85em;
+      font-weight: 500;
+      color: #856404;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+    .edit-btn:hover { background: #ffc107; color: #333; }
+
+    .save-btn {
+      padding: 8px 14px;
+      background: #28a745;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .save-btn:hover { background: #218838; }
+
+    .cancel-btn {
+      padding: 8px 14px;
+      background: #dc3545;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    .cancel-btn:hover { background: #c82333; }
+
+    .localities-preview {
+      font-size: 0.8em;
+      color: #888;
+      margin-top: 3px;
+    }
   </style>
 </head>
 <body>
@@ -465,12 +508,16 @@
             <button onclick="searchPostcodes()">Search</button>
           </div>
           <div id="postcodes-list" class="results-list">
-            ${data.map(p => `
+            ${data.map(p => {
+              const locs = p.localities ? p.localities.split('|').slice(0,6) : [];
+              const extra = p.localities ? p.localities.split('|').length - 6 : 0;
+              const locsPreview = locs.join(', ') + (extra > 0 ? ` +${extra} more` : '');
+              return `
               <div class="result-item" onclick="showPostcodeDetail('${p.postcode}')">
-                <h3>${p.postcode} - ${p.town}</h3>
-                <p>Region: ${p.region} | Lat: ${p.latitude}, Long: ${p.longitude}</p>
-              </div>
-            `).join('')}
+                <h3>${p.postcode} — ${p.town} <span style="font-weight:400; color:#888; font-size:0.85em;">${p.region}</span></h3>
+                ${locsPreview ? `<p class="localities-preview">Also: ${locsPreview}</p>` : ''}
+              </div>`;
+            }).join('')}
           </div>
           <div id="postcodes-pagination" class="pagination"></div>
         `;
@@ -596,11 +643,39 @@
         const res = await fetch(`${API}/postcodes/${postcode}`);
         const { postcode: pc, businesses } = await res.json();
 
+        const localities = pc.localities ? pc.localities.split('|') : [];
+
         let html = `
           <button class="back-button" onclick="loadPostcodes()">← Back</button>
           <div class="detail-view">
-            <h2>${pc.postcode} - ${pc.town}</h2>
-            <div class="detail-grid">
+            <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:15px; flex-wrap:wrap;">
+              <h2 id="detail-heading">${pc.postcode} — <span id="detail-town-display">${pc.town}</span></h2>
+              <button class="edit-btn" onclick="enableTownEdit('${pc.postcode}', '${pc.town.replace(/'/g,"\\'")}')">✏️ Fix Town Name</button>
+            </div>
+
+            <!-- Inline edit form (hidden by default) -->
+            <div id="edit-form" style="display:none; margin-top:12px; background:#fff3cd; border:1px solid #ffc107; border-radius:6px; padding:14px;">
+              <div style="font-size:0.9em; color:#856404; margin-bottom:8px;">
+                <strong>⚠️ Choose the correct primary town name from the localities below, or type a custom name.</strong>
+              </div>
+              <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px;">
+                ${localities.map(loc => `
+                  <button onclick="setTownInput('${loc.replace(/'/g,"\\'")}', '${pc.postcode}')"
+                    style="padding:5px 10px; border:1px solid #ddd; border-radius:4px; background:white; cursor:pointer; font-size:0.85em;">
+                    ${loc}
+                  </button>
+                `).join('')}
+              </div>
+              <div style="display:flex; gap:8px; align-items:center;">
+                <input id="town-edit-input" type="text" value="${pc.town}"
+                  style="flex:1; padding:8px 12px; border:1px solid #ffc107; border-radius:4px; font-size:1em;"
+                  placeholder="Type correct town name...">
+                <button onclick="saveTownEdit('${pc.postcode}')" class="save-btn">✅ Save</button>
+                <button onclick="cancelTownEdit()" class="cancel-btn">✗ Cancel</button>
+              </div>
+            </div>
+
+            <div class="detail-grid" style="margin-top:15px;">
               <div class="detail-item">
                 <div class="detail-label">Region</div>
                 <div class="detail-value">${pc.region}</div>
@@ -618,8 +693,21 @@
                 <div class="detail-value">${pc.eligible_88days ? '✓ Yes' : '✗ No'}</div>
               </div>
             </div>
+
+            ${localities.length > 1 ? `
+            <div style="margin-top:14px; background:white; padding:12px; border-radius:4px; border:1px solid #e9ecef;">
+              <div class="detail-label" style="margin-bottom:6px;">ALL LOCALITIES IN THIS POSTCODE (${localities.length})</div>
+              <div style="display:flex; flex-wrap:wrap; gap:6px;">
+                ${localities.map(loc => `
+                  <span style="background:#e9ecef; padding:3px 8px; border-radius:12px; font-size:0.82em; color:#444;">
+                    ${loc}${loc === pc.town ? ' ★' : ''}
+                  </span>
+                `).join('')}
+              </div>
+            </div>` : ''}
           </div>
-          <h3>Businesses in ${pc.town} (${businesses.length})</h3>
+
+          <h3 style="margin-top:20px;">Businesses in ${pc.town} (${businesses.length})</h3>
         `;
 
         if (businesses.length === 0) {
@@ -628,12 +716,7 @@
           html += `
             <table class="businesses-table">
               <thead>
-                <tr>
-                  <th>Business</th>
-                  <th>Category</th>
-                  <th>Hiring Status</th>
-                  <th>Verified</th>
-                </tr>
+                <tr><th>Business</th><th>Category</th><th>Hiring Status</th><th>Verified</th></tr>
               </thead>
               <tbody>
                 ${businesses.map(b => `
@@ -652,6 +735,51 @@
         document.getElementById('postcodes').innerHTML = html;
       } catch (e) {
         console.error('Error:', e);
+      }
+    }
+
+    // Edit helpers
+    function enableTownEdit(postcode, currentTown) {
+      document.getElementById('edit-form').style.display = 'block';
+      document.getElementById('town-edit-input').focus();
+    }
+
+    function setTownInput(town) {
+      document.getElementById('town-edit-input').value = town;
+      document.getElementById('town-edit-input').focus();
+    }
+
+    function cancelTownEdit() {
+      document.getElementById('edit-form').style.display = 'none';
+    }
+
+    async function saveTownEdit(postcode) {
+      const newTown = document.getElementById('town-edit-input').value.trim();
+      if (!newTown) return alert('Please enter a town name.');
+
+      try {
+        const res = await fetch(`${API}/postcodes/${postcode}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ town: newTown })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error);
+
+        // Update heading in place without full reload
+        document.getElementById('detail-town-display').textContent = newTown;
+        document.getElementById('edit-form').style.display = 'none';
+
+        // Show brief success flash
+        const btn = document.querySelector('.edit-btn');
+        btn.textContent = '✅ Saved!';
+        btn.style.background = '#28a745';
+        setTimeout(() => { btn.textContent = '✏️ Fix Town Name'; btn.style.background = ''; }, 2000);
+
+        // Refresh stats in case needed
+        loadStats();
+      } catch (e) {
+        alert('Error saving: ' + e.message);
       }
     }
 
