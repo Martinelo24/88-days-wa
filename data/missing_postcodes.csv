@@ -1,0 +1,87 @@
+postcode,town,region,state,latitude,longitude,eligible_88days
+6161,Carlisle,Perth,WA,-31.9500,115.8833,yes
+6335,Borden,Great Southern,WA,-34.3167,117.8833,yes
+6336,Broomehill-Tambellup,Great Southern,WA,-34.4167,117.7500,yes
+6337,Karmup,Great Southern,WA,-34.5500,117.7500,yes
+6338,Woodanilling,Great Southern,WA,-33.9500,117.8833,yes
+6341,Kojonup,Great Southern,WA,-33.8333,117.6500,yes
+6343,Kendenup,Great Southern,WA,-34.0500,117.5500,yes
+6346,Nyabing,Wheatbelt,WA,-33.2500,117.6667,yes
+6348,Ongerup,Great Southern,WA,-33.6833,118.5500,yes
+6351,Mount Barker,Great Southern,WA,-34.6333,117.6500,yes
+6352,Rocky Gully,Great Southern,WA,-34.5000,117.6333,yes
+6353,Tenterden,Great Southern,WA,-34.4667,117.8667,yes
+6355,Anglesea,Great Southern,WA,-34.1500,117.7667,yes
+6356,Badgingi,Great Southern,WA,-33.7500,117.8333,yes
+6357,Grasstrees,Great Southern,WA,-34.0833,118.0000,yes
+6358,Newdegate,Goldfields,WA,-32.4333,117.5500,yes
+6359,Pipersville,Great Southern,WA,-34.2500,117.8333,yes
+6361,Porongurup,Great Southern,WA,-34.3667,117.8500,yes
+6363,Spike,Great Southern,WA,-34.3333,117.9333,yes
+6365,Stirling Range,Great Southern,WA,-34.3500,117.9500,yes
+6367,Three Springs,Mid West,WA,-30.3667,115.3333,yes
+6368,Waldesorts,Great Southern,WA,-34.2500,117.6667,yes
+6373,Warrup,Great Southern,WA,-33.9667,117.7167,yes
+6375,Mongebegarre,Great Southern,WA,-33.9500,118.0000,yes
+6385,Frankland,Great Southern,WA,-34.3333,118.0000,yes
+6386,Hay River,Great Southern,WA,-34.4500,117.9500,yes
+6419,Boyanup,South West,WA,-33.5500,115.8333,yes
+6421,Dardanup,South West,WA,-33.6167,115.9000,yes
+6422,Donnybrook,South West,WA,-33.5833,115.8000,yes
+6423,Burekup,South West,WA,-33.6500,115.9500,yes
+6424,Capel,South West,WA,-33.6333,115.5000,yes
+6425,Widgiemooltha,Goldfields,WA,-30.8333,121.1667,yes
+6426,Wilyabrup,South West,WA,-33.6333,115.0667,yes
+6427,Balingup,South West,WA,-33.6500,115.9167,yes
+6428,Cowaramup,South West,WA,-33.7500,114.9500,yes
+6429,Karridale,South West,WA,-34.2000,115.0500,yes
+6431,Kirup,South West,WA,-33.6833,115.8833,yes
+6434,Mytchett,South West,WA,-33.7333,115.8333,yes
+6436,Myrdalup,South West,WA,-33.4833,115.9167,yes
+6437,Nannup,South West,WA,-33.9667,115.8833,yes
+6438,North Boyanup,South West,WA,-33.5500,115.8667,yes
+6440,Quedjinup,South West,WA,-33.7167,114.9667,yes
+6443,Quinninup,South West,WA,-33.8500,115.8833,yes
+6445,Withers,South West,WA,-33.4167,115.8500,yes
+6446,Willyung,South West,WA,-33.8000,115.8333,yes
+6447,West Torbay,South West,WA,-34.1500,115.2000,yes
+6448,Yabberup,South West,WA,-33.4000,115.8167,yes
+6450,Coolgardie,Goldfields,WA,-30.9658,121.1746,yes
+6452,Carbine,Goldfields,WA,-31.0833,121.4167,yes
+6466,Tenterden,Great Southern,WA,-34.4667,117.8667,yes
+6467,Cranbrook,Great Southern,WA,-34.2807,117.8562,yes
+6468,Ongerup,Great Southern,WA,-33.6833,118.5500,yes
+6470,Nyabing,Wheatbelt,WA,-33.2500,117.6667,yes
+6472,Broomehill,Great Southern,WA,-34.4167,117.7500,yes
+6473,Jerramungup,Great Southern,WA,-34.6500,119.0833,yes
+6475,Badgingi,Great Southern,WA,-33.7500,117.8333,yes
+6476,Karlgarin,Great Southern,WA,-34.0500,118.0500,yes
+6477,Kendenup,Great Southern,WA,-34.0500,117.5500,yes
+6479,Pipersville,Great Southern,WA,-34.2500,117.8333,yes
+6480,Springdale,Great Southern,WA,-33.9500,117.8833,yes
+6484,Woodanilling,Great Southern,WA,-33.9500,117.8833,yes
+6487,Mount Barker,Great Southern,WA,-34.6333,117.6500,yes
+6488,Rocky Gully,Great Southern,WA,-34.5000,117.6333,yes
+6489,Tenterden,Great Southern,WA,-34.4667,117.8667,yes
+6490,Tambellup,Great Southern,WA,-34.4617,117.7234,yes
+6517,Leinster,Goldfields,WA,-29.3500,121.3000,yes
+6518,Bulong,Goldfields,WA,-31.0667,121.2833,yes
+6519,Widgiemooltha,Goldfields,WA,-30.8333,121.1667,yes
+6536,Kambalda,Goldfields,WA,-31.0883,121.6458,yes
+6606,Paddington,Goldfields,WA,-29.1667,121.2000,yes
+6608,Leonora,Goldfields,WA,-29.0018,121.3317,yes
+6609,Menzies,Goldfields,WA,-29.7036,120.4131,yes
+6612,Wiluna,Goldfields,WA,-26.5667,120.2167,yes
+6613,Cue,Goldfields,WA,-27.4167,117.9500,yes
+6614,Meekatharra,Goldfields,WA,-26.5833,118.5000,yes
+6616,Sandstone,Goldfields,WA,-27.8167,119.2833,yes
+6623,Mount Magnet,Goldfields,WA,-27.8059,117.8667,yes
+6627,Yalgoo,Goldfields,WA,-27.5000,116.6667,yes
+6628,Paynes Find,Goldfields,WA,-27.6000,117.5833,yes
+6631,Carnamah,Mid West,WA,-30.0333,115.3000,yes
+6632,Eneabba,Wheatbelt,WA,-30.5500,115.0833,yes
+6635,Mullewa,Mid West,WA,-29.9667,115.3667,yes
+6638,Three Springs,Mid West,WA,-30.3667,115.3333,yes
+6639,Mingenew,Mid West,WA,-30.5000,114.9667,yes
+6731,Gascoyne Junction,Mid West,WA,-25.3167,114.5833,yes
+6733,Denham,Mid West,WA,-25.9333,113.5333,yes

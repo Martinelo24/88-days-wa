@@ -178,9 +178,10 @@
     .pagination {
       display: flex;
       justify-content: center;
-      gap: 10px;
+      gap: 8px;
       margin-top: 30px;
       align-items: center;
+      flex-wrap: wrap;
     }
 
     .pagination button {
@@ -190,6 +191,8 @@
       background: white;
       cursor: pointer;
       transition: all 0.3s ease;
+      font-weight: 500;
+      min-width: 40px;
     }
 
     .pagination button:hover:not(:disabled) {
@@ -199,8 +202,10 @@
     }
 
     .pagination button:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
+      background: #667eea;
+      color: white;
+      cursor: default;
+      border-color: #667eea;
     }
 
     .pagination-info {
@@ -451,29 +456,47 @@
     async function loadPostcodes() {
       const { page, limit, search } = postcodeState;
       try {
-        document.getElementById('postcodes-list').innerHTML = '<div class="loading"></div>';
         const res = await fetch(`${API}/postcodes?page=${page}&limit=${limit}&search=${search}`);
         const { data, pagination } = await res.json();
 
-        const html = data.map(p => `
-          <div class="result-item" onclick="showPostcodeDetail('${p.postcode}')">
-            <h3>${p.postcode} - ${p.town}</h3>
-            <p>Region: ${p.region} | Lat: ${p.latitude}, Long: ${p.longitude}</p>
+        const html = `
+          <div class="search-box">
+            <input type="text" id="postcode-search" placeholder="Search by postcode or town..." onkeyup="searchPostcodes()" value="${search}">
+            <button onclick="searchPostcodes()">Search</button>
           </div>
-        `).join('');
+          <div id="postcodes-list" class="results-list">
+            ${data.map(p => `
+              <div class="result-item" onclick="showPostcodeDetail('${p.postcode}')">
+                <h3>${p.postcode} - ${p.town}</h3>
+                <p>Region: ${p.region} | Lat: ${p.latitude}, Long: ${p.longitude}</p>
+              </div>
+            `).join('')}
+          </div>
+          <div id="postcodes-pagination" class="pagination"></div>
+        `;
 
-        document.getElementById('postcodes-list').innerHTML = html || '<div class="empty-state"><p>No postcodes found</p></div>';
-        updatePagination('postcodes-pagination', pagination, 'loadPostcodes');
+        document.getElementById('postcodes').innerHTML = html || '<div class="empty-state"><p>No postcodes found</p></div>';
+        updatePagination('postcodes-pagination', pagination, 'postcodes', 'loadPostcodes');
       } catch (e) {
         console.error('Error:', e);
-        document.getElementById('postcodes-list').innerHTML = '<div class="empty-state"><p>Error loading data</p></div>';
+        document.getElementById('postcodes').innerHTML = '<div class="empty-state"><p>Error loading data</p></div>';
       }
     }
 
+    let searchTimeout;
     function searchPostcodes() {
-      postcodeState.search = document.getElementById('postcode-search').value;
-      postcodeState.page = 1;
-      loadPostcodes();
+      const searchInput = document.getElementById('postcode-search');
+      if (!searchInput) return; // Element might not exist yet
+
+      // Clear the previous timeout
+      clearTimeout(searchTimeout);
+
+      // Set a new timeout - only search after user stops typing for 500ms
+      searchTimeout = setTimeout(() => {
+        postcodeState.search = searchInput.value;
+        postcodeState.page = 1;
+        loadPostcodes();
+      }, 500);
     }
 
     // Load categories
@@ -482,15 +505,19 @@
         const res = await fetch(`${API}/categories`);
         const { data } = await res.json();
 
-        const html = data.map(c => `
-          <div class="result-item" onclick="showCategoryDetail(${c.id})">
-            <h3>${c.category_name}</h3>
-            <p>Parent: ${c.parent_category}</p>
-            <p>Keywords: ${c.search_keywords.substring(0, 60)}...</p>
+        const html = `
+          <div id="categories-list" class="results-list">
+            ${data.map(c => `
+              <div class="result-item" onclick="showCategoryDetail(${c.id})">
+                <h3>${c.category_name}</h3>
+                <p>Parent: ${c.parent_category}</p>
+                <p>Keywords: ${c.search_keywords.substring(0, 60)}...</p>
+              </div>
+            `).join('')}
           </div>
-        `).join('');
+        `;
 
-        document.getElementById('categories-list').innerHTML = html;
+        document.getElementById('categories').innerHTML = html;
       } catch (e) {
         console.error('Error:', e);
       }
@@ -538,17 +565,29 @@
           `;
           document.getElementById('businesses-list').innerHTML = html;
         }
-        updatePagination('businesses-pagination', pagination, 'loadBusinesses');
+        updatePagination('businesses-pagination', pagination, 'businesses', 'loadBusinesses');
       } catch (e) {
         console.error('Error:', e);
       }
     }
 
+    let businessSearchTimeout;
     function searchBusinesses() {
-      businessState.search = document.getElementById('business-search')?.value || '';
-      businessState.verified = document.getElementById('verified-filter')?.value || '';
-      businessState.page = 1;
-      loadBusinesses();
+      const searchInput = document.getElementById('business-search');
+      const filterInput = document.getElementById('verified-filter');
+
+      if (!searchInput || !filterInput) return; // Elements might not exist yet
+
+      // Clear the previous timeout
+      clearTimeout(businessSearchTimeout);
+
+      // Set a new timeout - only search after user stops typing for 500ms
+      businessSearchTimeout = setTimeout(() => {
+        businessState.search = searchInput.value || '';
+        businessState.verified = filterInput.value || '';
+        businessState.page = 1;
+        loadBusinesses();
+      }, 500);
     }
 
     // Show detail views
@@ -693,42 +732,67 @@
     }
 
     // Pagination
-    function updatePagination(elementId, pagination, loadFunc) {
+    function updatePagination(elementId, pagination, stateObj, loadFunc) {
       const { page, totalPages } = pagination;
       let html = '';
 
       if (totalPages > 1) {
+        // Previous button
         if (page > 1) {
-          html += `<button onclick="${loadFunc}(); document.documentElement.scrollTop = 0;">← Previous</button>`;
+          html += `<button onclick="goToPage(${page - 1}, '${stateObj}')">← Previous</button>`;
         }
-        html += `<span class="pagination-info">Page ${page} of ${totalPages}</span>`;
+
+        // Page numbers
+        let startPage = Math.max(1, page - 2);
+        let endPage = Math.min(totalPages, page + 2);
+
+        // Show first page if not in range
+        if (startPage > 1) {
+          html += `<button onclick="goToPage(1, '${stateObj}')">1</button>`;
+          if (startPage > 2) {
+            html += `<span class="pagination-info">...</span>`;
+          }
+        }
+
+        // Show page range
+        for (let i = startPage; i <= endPage; i++) {
+          if (i === page) {
+            html += `<button style="background: #667eea; color: white;" disabled>${i}</button>`;
+          } else {
+            html += `<button onclick="goToPage(${i}, '${stateObj}')">${i}</button>`;
+          }
+        }
+
+        // Show last page if not in range
+        if (endPage < totalPages) {
+          if (endPage < totalPages - 1) {
+            html += `<span class="pagination-info">...</span>`;
+          }
+          html += `<button onclick="goToPage(${totalPages}, '${stateObj}')">${totalPages}</button>`;
+        }
+
+        // Next button
         if (page < totalPages) {
-          html += `<button onclick="${loadFunc}(); document.documentElement.scrollTop = 0;">Next →</button>`;
+          html += `<button onclick="goToPage(${page + 1}, '${stateObj}')">Next →</button>`;
         }
+
+        html += `<span class="pagination-info" style="margin-left: 20px;">Page ${page} of ${totalPages}</span>`;
       }
 
       document.getElementById(elementId).innerHTML = html;
     }
 
-    // Update pagination handlers
-    document.addEventListener('DOMContentLoaded', () => {
-      window.prevPostcodes = () => {
-        postcodeState.page--;
+    // Go to specific page
+    function goToPage(pageNum, stateType) {
+      if (stateType === 'postcodes') {
+        postcodeState.page = pageNum;
         loadPostcodes();
-      };
-      window.nextPostcodes = () => {
-        postcodeState.page++;
-        loadPostcodes();
-      };
-      window.prevBusinesses = () => {
-        businessState.page--;
+      } else if (stateType === 'businesses') {
+        businessState.page = pageNum;
         loadBusinesses();
-      };
-      window.nextBusinesses = () => {
-        businessState.page++;
-        loadBusinesses();
-      };
-    });
+      }
+      document.documentElement.scrollTop = 0;
+    }
   </script>
 </body>
 </html>
