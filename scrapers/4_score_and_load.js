@@ -17,6 +17,7 @@ const fs = require('fs');
 const path = require('path');
 const sqlite3 = require('sqlite3').verbose();
 const { paths, OSM_TAG_RULES, NAME_KEYWORD_RULES } = require('./config');
+const { evaluate } = require('../lib/eligibility');
 
 const dbPath = path.join(__dirname, '../data/88days.db');
 
@@ -77,11 +78,11 @@ function scoreCandidate(c) {
       (business_name, postcode, town, region, job_category_id, job_category_name,
        website_url, phone_number, work_types_offered, hiring_status, source_found,
        latitude, longitude, abn, abn_status, sources, osm_id, confidence_score,
-       work_categories, review_status, verified)
-    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,'pending',0)
+       work_categories, eligibility, eligibility_reason, review_status, verified)
+    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,'pending',0)
   `);
 
-  let loaded = 0, skippedDup = 0;
+  let loaded = 0, skippedDup = 0, mismatches = 0;
   await new Promise((resolve) => {
     db.serialize(() => {
       for (const c of validated) {
@@ -90,6 +91,11 @@ function scoreCandidate(c) {
         const tagCat = categoryFromTags(c.tags || {});
         const cat = refineByName(c.name, tagCat);
         const { score, sources } = scoreCandidate(c);
+
+        // Eligibility guard: does this work type match the postcode's categories?
+        const elig = evaluate(cat.id, c.work_categories);
+        const verdict = elig.eligible === true ? 'eligible' : elig.eligible === false ? 'mismatch' : null;
+        if (verdict === 'mismatch') mismatches++;
 
         insert.run(
           [
@@ -112,6 +118,8 @@ function scoreCandidate(c) {
             c.osm_id,
             score,
             c.work_categories || null,
+            verdict,
+            elig.reason,
           ],
           function () {
             if (this.changes) loaded++;
@@ -130,6 +138,7 @@ function scoreCandidate(c) {
   db.close();
   console.log(`  Loaded:  ${loaded}`);
   console.log(`  Skipped (duplicate name+postcode or osm_id): ${skippedDup}`);
+  console.log(`  ⚠️  Eligibility mismatches (work type ≠ postcode category): ${mismatches} — hidden from queue by default`);
   console.log(`\n✅ Pending review queue now holds ${total} candidates.`);
   console.log(`   Open http://localhost:3000 → Review Queue tab to verify them.`);
 })();

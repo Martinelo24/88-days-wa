@@ -21,6 +21,8 @@ const columns = [
   ['osm_id', 'TEXT'],
   ['review_status', "TEXT DEFAULT 'pending'"],
   ['work_categories', 'TEXT'],
+  ['eligibility', 'TEXT'],            // 'eligible' | 'mismatch' | NULL (unknown)
+  ['eligibility_reason', 'TEXT'],
 ];
 
 function addColumn(name, type) {

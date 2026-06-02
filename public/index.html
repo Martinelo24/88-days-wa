@@ -452,6 +452,14 @@
       display:inline-block; padding:2px 8px; border-radius:10px;
       font-size:0.72em; font-weight:600; margin-right:4px;
     }
+    .elig-badge {
+      display:inline-block; padding:2px 9px; border-radius:10px;
+      font-size:0.74em; font-weight:700; margin-right:6px;
+    }
+    .elig-ok { background:#d4edda; color:#155724; }
+    .elig-bad { background:#f8d7da; color:#721c24; }
+    .elig-unknown { background:#e2e3e5; color:#41464b; }
+
     .src-osm { background:#cce5ff; color:#004085; }
     .src-abn { background:#d4edda; color:#155724; }
     .src-google { background:#f8d7da; color:#721c24; }
@@ -1048,8 +1056,14 @@
     }
 
     // ── REVIEW QUEUE ──────────────────────────────────────────────
-    let reviewState = { page: 1, limit: 20 };
+    let reviewState = { page: 1, limit: 20, showMismatches: false };
     let categoryCache = null;
+
+    function toggleMismatches() {
+      reviewState.showMismatches = !reviewState.showMismatches;
+      reviewState.page = 1;
+      loadReviewQueue();
+    }
 
     async function getCategories() {
       if (categoryCache) return categoryCache;
@@ -1066,19 +1080,34 @@
     }
 
     async function loadReviewQueue() {
-      const { page, limit } = reviewState;
+      const { page, limit, showMismatches } = reviewState;
       document.getElementById('review-list').innerHTML = '<div class="loading"></div>';
       try {
         const [res, cats] = await Promise.all([
-          fetch(`${API}/review/queue?status=pending&page=${page}&limit=${limit}`),
+          fetch(`${API}/review/queue?status=pending&page=${page}&limit=${limit}&showMismatches=${showMismatches}`),
           getCategories()
         ]);
-        const { data, pagination } = await res.json();
+        const { data, pagination, mismatchCount } = await res.json();
+
+        // Toggle bar — shows how many eligibility mismatches are hidden.
+        const toggleBar = `
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; padding:10px 14px; background:#f8f9fa; border-radius:8px; flex-wrap:wrap; gap:8px;">
+            <div style="font-size:0.9em; color:#555;">
+              ${showMismatches
+                ? `Showing <strong>${mismatchCount}</strong> eligibility mismatch${mismatchCount===1?'':'es'} (work type ≠ postcode category)`
+                : `Showing eligible candidates. ${mismatchCount > 0 ? `<strong>${mismatchCount}</strong> mismatch${mismatchCount===1?'':'es'} hidden.` : 'No mismatches.'}`}
+            </div>
+            ${mismatchCount > 0 || showMismatches
+              ? `<button class="btn-edit" onclick="toggleMismatches()">${showMismatches ? '← Back to eligible' : `⚠️ Show ${mismatchCount} mismatch${mismatchCount===1?'':'es'}`}</button>`
+              : ''}
+          </div>`;
 
         if (!data.length) {
-          document.getElementById('review-list').innerHTML =
-            '<div class="empty-state"><p>🎉 Review queue is empty</p>' +
-            '<p>Run <code>npm run scrape:pilot</code> to discover candidates, then refresh.</p></div>';
+          document.getElementById('review-list').innerHTML = toggleBar +
+            (showMismatches
+              ? '<div class="empty-state"><p>No mismatches 🎉</p></div>'
+              : '<div class="empty-state"><p>🎉 Review queue is empty</p>' +
+                '<p>Run <code>npm run scrape:pilot</code> to discover candidates, then refresh.</p></div>');
           document.getElementById('review-pagination').innerHTML = '';
           return;
         }
@@ -1086,17 +1115,23 @@
         const catOptions = cats.map(c =>
           `<option value="${c.id}">${c.category_name}</option>`).join('');
 
-        document.getElementById('review-list').innerHTML = data.map(b => {
+        document.getElementById('review-list').innerHTML = toggleBar + data.map(b => {
           const srcBadges = (b.sources || '').split(',').filter(Boolean)
             .map(s => `<span class="src-badge src-${s}">${s.toUpperCase()}</span>`).join('');
           const pcSrc = b.source_found ? b.source_found.replace('osm:', 'OSM · ') : '';
           const mapsQuery = encodeURIComponent(`${b.business_name} ${b.town} WA ${b.postcode}`);
+          // Eligibility badge — green tick, red cross, or grey unknown
+          let eligBadge;
+          if (b.eligibility === 'eligible') eligBadge = `<span class="elig-badge elig-ok">✓ Eligible</span>`;
+          else if (b.eligibility === 'mismatch') eligBadge = `<span class="elig-badge elig-bad">✗ Work type ≠ postcode category</span>`;
+          else eligBadge = `<span class="elig-badge elig-unknown">? Needs category</span>`;
           return `
           <div class="review-card" id="card-${b.id}">
             <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px; flex-wrap:wrap;">
               <div>
                 <h3>${b.business_name}</h3>
                 <div class="review-meta">📍 <strong>${b.postcode}</strong> ${b.town} · ${b.region || ''} · <em>${b.job_category_name || 'uncategorised'}</em></div>
+                <div class="review-meta">${eligBadge} <span style="color:#777;">${b.eligibility_reason || ''}</span></div>
                 <div class="review-meta">${srcBadges} ${b.abn ? `ABN ${b.abn} <span style="color:#155724;">(${b.abn_status})</span>` : '<span style="color:#999;">no ABN match</span>'}</div>
                 <div class="review-meta">
                   ${b.website_url ? `🔗 <a href="${b.website_url}" target="_blank">${b.website_url}</a>` : ''}

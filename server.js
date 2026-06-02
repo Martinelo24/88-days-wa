@@ -2,6 +2,7 @@ const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 const cors = require('cors');
+const { evaluate } = require('./lib/eligibility');
 
 const app = express();
 const PORT = 3000;
@@ -132,29 +133,48 @@ app.get('/api/businesses', (req, res) => {
 
 // ============ REVIEW QUEUE (human verification gate) ============
 
-// Get candidates awaiting review, sorted by confidence (highest first)
+// Get candidates awaiting review, sorted by confidence (highest first).
+// Eligibility mismatches are HIDDEN by default; pass ?showMismatches=true to see them.
 app.get('/api/review/queue', (req, res) => {
   const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 20;
   const offset = (page - 1) * limit;
   const status = req.query.status || 'pending';
+  const showMismatches = req.query.showMismatches === 'true';
 
-  const where = 'WHERE review_status = ?';
+  let where = 'WHERE review_status = ?';
   const params = [status];
+  if (showMismatches) {
+    where += " AND eligibility = 'mismatch'"; // show ONLY mismatches when toggled
+  } else {
+    where += " AND (eligibility = 'eligible' OR eligibility IS NULL)"; // hide mismatches
+  }
 
-  db.get(`SELECT COUNT(*) as count FROM businesses ${where}`, params, (err, row) => {
-    if (err) return res.status(500).json({ error: err.message });
-    db.all(
-      `SELECT * FROM businesses ${where}
-       ORDER BY confidence_score DESC, business_name ASC
-       LIMIT ? OFFSET ?`,
-      [...params, limit, offset],
-      (err, rows) => {
+  // Always report how many mismatches are hidden, so the UI can show the toggle count.
+  db.get(
+    "SELECT COUNT(*) as c FROM businesses WHERE review_status = ? AND eligibility = 'mismatch'",
+    [status],
+    (e, mmRow) => {
+      const mismatchCount = mmRow ? mmRow.c : 0;
+      db.get(`SELECT COUNT(*) as count FROM businesses ${where}`, params, (err, row) => {
         if (err) return res.status(500).json({ error: err.message });
-        res.json({ data: rows || [], pagination: { page, limit, total: row.count, totalPages: Math.ceil(row.count / limit) } });
-      }
-    );
-  });
+        db.all(
+          `SELECT * FROM businesses ${where}
+           ORDER BY confidence_score DESC, business_name ASC
+           LIMIT ? OFFSET ?`,
+          [...params, limit, offset],
+          (err, rows) => {
+            if (err) return res.status(500).json({ error: err.message });
+            res.json({
+              data: rows || [],
+              mismatchCount,
+              pagination: { page, limit, total: row.count, totalPages: Math.ceil(row.count / limit) },
+            });
+          }
+        );
+      });
+    }
+  );
 });
 
 // Approve a candidate → becomes part of the public dataset
@@ -205,7 +225,28 @@ app.patch('/api/businesses/:id', (req, res) => {
     function (err) {
       if (err) return res.status(500).json({ error: err.message });
       if (this.changes === 0) return res.status(404).json({ error: 'Not found' });
-      res.json({ success: true, id: req.params.id });
+
+      // If the category or postcode was edited, re-evaluate eligibility from scratch.
+      const touchedCat = 'job_category_id' in req.body;
+      const touchedPc = 'postcode' in req.body;
+      if (!touchedCat && !touchedPc) return res.json({ success: true, id: req.params.id });
+
+      db.get(
+        `SELECT b.job_category_id, p.work_categories
+         FROM businesses b LEFT JOIN postcodes p ON b.postcode = p.postcode
+         WHERE b.id = ?`,
+        [req.params.id],
+        (e, r) => {
+          if (e || !r) return res.json({ success: true, id: req.params.id });
+          const v = evaluate(r.job_category_id, r.work_categories);
+          const verdict = v.eligible === true ? 'eligible' : v.eligible === false ? 'mismatch' : null;
+          db.run(
+            'UPDATE businesses SET eligibility = ?, eligibility_reason = ? WHERE id = ?',
+            [verdict, v.reason, req.params.id],
+            () => res.json({ success: true, id: req.params.id, eligibility: verdict, eligibility_reason: v.reason })
+          );
+        }
+      );
     }
   );
 });
