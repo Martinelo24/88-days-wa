@@ -501,10 +501,10 @@
     </div>
 
     <div class="tabs">
-      <button class="tab-button active" onclick="switchTab('postcodes')">📍 Postcodes</button>
-      <button class="tab-button" onclick="switchTab('categories')">🏷️ Categories</button>
-      <button class="tab-button" onclick="switchTab('businesses')">🏢 Businesses</button>
-      <button class="tab-button" onclick="switchTab('review')">🔍 Review Queue</button>
+      <button class="tab-button active" data-tab="postcodes" onclick="switchTab('postcodes')">📍 Postcodes</button>
+      <button class="tab-button" data-tab="categories" onclick="switchTab('categories')">🏷️ Categories</button>
+      <button class="tab-button" data-tab="businesses" onclick="switchTab('businesses')">🏢 Businesses</button>
+      <button class="tab-button" data-tab="review" onclick="switchTab('review')">🔍 Review Queue</button>
     </div>
 
     <div class="cat-legend">
@@ -969,7 +969,9 @@
       document.querySelectorAll('.tab-button').forEach(el => el.classList.remove('active'));
 
       document.getElementById(tabName).classList.add('active');
-      event.target.classList.add('active');
+      // Find the matching tab button by data-tab (robust — no reliance on global event)
+      const btn = document.querySelector(`.tab-button[data-tab="${tabName}"]`);
+      if (btn) btn.classList.add('active');
 
       if (tabName === 'businesses' && !document.getElementById('businesses-list').innerHTML) {
         loadBusinesses();

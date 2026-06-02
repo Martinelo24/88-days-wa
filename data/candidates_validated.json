@@ -12,7 +12,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6236",
+    "postcode_source": "nominatim",
+    "town": "Henty",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/1114215244",
@@ -28,7 +37,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6333",
+    "postcode_source": "nominatim",
+    "town": "Hay",
+    "region": "Great Southern",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/1114215322",
@@ -44,7 +62,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6333",
+    "postcode_source": "nominatim",
+    "town": "Hay",
+    "region": "Great Southern",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/1160793953",
@@ -59,7 +86,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6285",
+    "postcode_source": "nominatim",
+    "town": "Margaret River",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/1160797112",
@@ -74,7 +110,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6286",
+    "postcode_source": "nominatim",
+    "town": "Boranup",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/1836235254",
@@ -92,7 +137,16 @@
     "addr_city": null,
     "website": "https://windfallwine.com.au/",
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6237",
+    "postcode_source": "nominatim",
+    "town": "Elgin",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/1854156947",
@@ -110,7 +164,16 @@
     "addr_city": null,
     "website": "https://www.providore.com.au/",
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6282",
+    "postcode_source": "nearest",
+    "town": "Yallingup",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/2074353726",
@@ -126,7 +189,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6282",
+    "postcode_source": "nearest",
+    "town": "Yallingup",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/2256539075",
@@ -152,7 +224,16 @@
     "addr_city": "Wilyabrup",
     "website": "https://www.gralyn.com.au/",
     "phone": "+61 8 9755 6245",
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6280",
+    "postcode_source": "tag",
+    "town": "Augusta",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/2663447346",
@@ -176,7 +257,16 @@
     "addr_city": null,
     "website": "https://www.cullenwines.com.au",
     "phone": "+61 8 9755 5277",
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6280",
+    "postcode_source": "tag",
+    "town": "Augusta",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/2664655123",
@@ -200,7 +290,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6220",
+    "postcode_source": "nominatim",
+    "town": "Uduc",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/3623415710",
@@ -220,7 +319,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6333",
+    "postcode_source": "tag",
+    "town": "Hay",
+    "region": "Great Southern",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/3846082661",
@@ -236,7 +344,16 @@
     "addr_city": null,
     "website": null,
     "phone": "+61 8 9772 4255",
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6258",
+    "postcode_source": "nominatim",
+    "town": "Perup",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/3902990268",
@@ -251,7 +368,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6258",
+    "postcode_source": "nominatim",
+    "town": "Perup",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/3940696422",
@@ -271,7 +397,16 @@
     "addr_city": null,
     "website": "https://www.lostlake.com.au/",
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6260",
+    "postcode_source": "tag",
+    "town": "Callcup",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/4118978846",
@@ -294,7 +429,16 @@
     "addr_city": "Channybearup",
     "website": "https://www.rambouillet.com.au/",
     "phone": "+61 8 9776 0114",
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6260",
+    "postcode_source": "tag",
+    "town": "Callcup",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/4143795127",
@@ -316,7 +460,16 @@
     "addr_city": "Channybearup",
     "website": "https://www.mountfordwines.com.au/",
     "phone": "+61 8 9776 1345",
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6260",
+    "postcode_source": "tag",
+    "town": "Callcup",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/4271559495",
@@ -333,7 +486,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6282",
+    "postcode_source": "nearest",
+    "town": "Yallingup",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/4285737789",
@@ -352,7 +514,16 @@
     "addr_city": null,
     "website": "http://www.laurancewines.com/",
     "phone": "+61 8 9750 4000",
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6282",
+    "postcode_source": "nearest",
+    "town": "Yallingup",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/4395801867",
@@ -374,7 +545,16 @@
     "addr_city": "William Bay",
     "website": "http://www.elephantsrockcider.com.au/",
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6333",
+    "postcode_source": "tag",
+    "town": "Hay",
+    "region": "Great Southern",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/4438480226",
@@ -395,7 +575,16 @@
     "addr_city": "Mount Barker",
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6324",
+    "postcode_source": "tag",
+    "town": "Perillup",
+    "region": "Great Southern",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/4542525793",
@@ -415,7 +604,16 @@
     "addr_city": null,
     "website": "https://kneedeepwines.com.au/",
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6282",
+    "postcode_source": "nearest",
+    "town": "Yallingup",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/4564222851",
@@ -434,7 +632,16 @@
     "addr_city": null,
     "website": "https://www.watershedwines.com.au",
     "phone": "+61 8 9758 8633",
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6285",
+    "postcode_source": "nominatim",
+    "town": "Margaret River",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/4564811477",
@@ -453,7 +660,16 @@
     "addr_city": null,
     "website": "https://redgatewines.com.au/",
     "phone": "+61 8 9757 6488",
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6286",
+    "postcode_source": "nominatim",
+    "town": "Boranup",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/4568346769",
@@ -472,7 +688,16 @@
     "addr_city": null,
     "website": "http://www.killerby.com.au",
     "phone": "+61 8 9755 5983",
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6284",
+    "postcode_source": "nominatim",
+    "town": "Baudin",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/4568353365",
@@ -490,7 +715,16 @@
     "addr_city": null,
     "website": "http://m.sunflowersfarm.com",
     "phone": "+61 8 9757 3343",
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6284",
+    "postcode_source": "nominatim",
+    "town": "Baudin",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/4568353963",
@@ -505,7 +739,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6284",
+    "postcode_source": "nominatim",
+    "town": "Baudin",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/4568354322",
@@ -526,7 +769,16 @@
     "addr_city": null,
     "website": "https://driftwoodwines.com.au/",
     "phone": "+61 8 9755 6323",
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6282",
+    "postcode_source": "nominatim",
+    "town": "Yallingup",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/4568354323",
@@ -544,7 +796,16 @@
     "addr_city": null,
     "website": "https://credarowines.com.au/",
     "phone": "+61 8 9756 6520",
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6282",
+    "postcode_source": "nominatim",
+    "town": "Yallingup",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/4569891277",
@@ -562,7 +823,16 @@
     "addr_city": null,
     "website": "https://hayshedhill.com.au/",
     "phone": "+61 8 9755 6046",
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6282",
+    "postcode_source": "nearest",
+    "town": "Yallingup",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/4569891279",
@@ -580,7 +850,16 @@
     "addr_city": null,
     "website": "https://www.heydonestate.com.au/",
     "phone": "+61 8 9755 6995",
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6282",
+    "postcode_source": "nearest",
+    "town": "Yallingup",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/4569891280",
@@ -597,7 +876,16 @@
     "addr_city": null,
     "website": "https://www.margaretrivernougat.com.au/",
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6282",
+    "postcode_source": "nearest",
+    "town": "Yallingup",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/4574300340",
@@ -615,7 +903,16 @@
     "addr_city": null,
     "website": "https://www.cullenwines.com.au/",
     "phone": "+61 8 9755 5277",
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6284",
+    "postcode_source": "nominatim",
+    "town": "Baudin",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/4574300734",
@@ -633,7 +930,16 @@
     "addr_city": null,
     "website": "https://www.juniperestate.com.au/",
     "phone": "+61 8 9755 9000",
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6284",
+    "postcode_source": "nominatim",
+    "town": "Baudin",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/4574324318",
@@ -650,7 +956,16 @@
     "addr_city": null,
     "website": "https://www.mosswood.com.au/",
     "phone": "+61 8 9755 6266",
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6284",
+    "postcode_source": "nominatim",
+    "town": "Baudin",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/4574488575",
@@ -667,7 +982,16 @@
     "addr_city": null,
     "website": "https://www.windowsestate.com/",
     "phone": "+61 8 9756 6655",
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6282",
+    "postcode_source": "nominatim",
+    "town": "Yallingup",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/4574520268",
@@ -683,7 +1007,16 @@
     "addr_city": null,
     "website": "https://www.windance.com.au/",
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6282",
+    "postcode_source": "nominatim",
+    "town": "Yallingup",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/4656509319",
@@ -700,7 +1033,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6220",
+    "postcode_source": "nominatim",
+    "town": "Uduc",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/4714765507",
@@ -719,7 +1061,16 @@
     "addr_city": null,
     "website": "https://www.vassefelix.com.au",
     "phone": "+61 8 9756 5050",
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6284",
+    "postcode_source": "nominatim",
+    "town": "Baudin",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/4753140471",
@@ -740,7 +1091,16 @@
     "addr_city": "Peerabeelup",
     "website": "https://ampersandestates.com.au/",
     "phone": "+61 8 9776 2016",
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6260",
+    "postcode_source": "nominatim",
+    "town": "Callcup",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/4754457988",
@@ -757,7 +1117,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6282",
+    "postcode_source": "nominatim",
+    "town": "Yallingup",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/5496657209",
@@ -781,7 +1150,16 @@
     "addr_city": "Nannup",
     "website": "https://www.whimwoodestatewines.com.au",
     "phone": "+61 8 9756 2225",
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6275",
+    "postcode_source": "tag",
+    "town": "Nannup",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/5516488972",
@@ -796,7 +1174,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6275",
+    "postcode_source": "nominatim",
+    "town": "Nannup",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/5997793806",
@@ -816,7 +1203,16 @@
     "addr_city": null,
     "website": null,
     "phone": "+61 8 9727 1986",
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6271",
+    "postcode_source": "nominatim",
+    "town": "Capel",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/6294894851",
@@ -833,7 +1229,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6236",
+    "postcode_source": "nominatim",
+    "town": "Henty",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/6866143069",
@@ -851,7 +1256,16 @@
     "addr_city": null,
     "website": "https://www.fishbonewines.com.au/",
     "phone": "+61 8 9755 6726",
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6282",
+    "postcode_source": "nearest",
+    "town": "Yallingup",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/9097334272",
@@ -866,7 +1280,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6392",
+    "postcode_source": "nominatim",
+    "town": "Bokal",
+    "region": "Great Southern",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/9954210195",
@@ -882,7 +1305,16 @@
     "addr_city": null,
     "website": "https://talismanwines.com.au/",
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6236",
+    "postcode_source": "nominatim",
+    "town": "Henty",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/10948428683",
@@ -899,7 +1331,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6239",
+    "postcode_source": "nominatim",
+    "town": "Argyle",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/11832543181",
@@ -915,7 +1356,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6333",
+    "postcode_source": "nominatim",
+    "town": "Hay",
+    "region": "Great Southern",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/12128945591",
@@ -932,7 +1382,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6285",
+    "postcode_source": "nominatim",
+    "town": "Margaret River",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/12484052582",
@@ -952,7 +1411,16 @@
     "addr_city": "Bramley",
     "website": "https://jarvisestate.com.au/",
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6284",
+    "postcode_source": "nominatim",
+    "town": "Baudin",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "node/13568803034",
@@ -968,7 +1436,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6282",
+    "postcode_source": "nearest",
+    "town": "Yallingup",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/37523769",
@@ -983,7 +1460,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6225",
+    "postcode_source": "nominatim",
+    "town": "Muja",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/37523892",
@@ -998,7 +1484,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6225",
+    "postcode_source": "nominatim",
+    "town": "Muja",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/37524035",
@@ -1013,7 +1508,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6225",
+    "postcode_source": "nominatim",
+    "town": "Muja",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/37524551",
@@ -1028,7 +1532,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6225",
+    "postcode_source": "nominatim",
+    "town": "Muja",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/38223901",
@@ -1043,7 +1556,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6225",
+    "postcode_source": "nominatim",
+    "town": "Muja",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/38279519",
@@ -1058,7 +1580,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6225",
+    "postcode_source": "nominatim",
+    "town": "Muja",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/44162409",
@@ -1073,7 +1604,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6236",
+    "postcode_source": "nominatim",
+    "town": "Henty",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/44162967",
@@ -1088,7 +1628,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6236",
+    "postcode_source": "nominatim",
+    "town": "Henty",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/55896343",
@@ -1103,7 +1652,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6225",
+    "postcode_source": "nominatim",
+    "town": "Muja",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/88812840",
@@ -1118,7 +1676,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6225",
+    "postcode_source": "nominatim",
+    "town": "Muja",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/92551861",
@@ -1133,7 +1700,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6391",
+    "postcode_source": "nominatim",
+    "town": "Culbin",
+    "region": "Great Southern",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/173140813",
@@ -1148,7 +1724,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6286",
+    "postcode_source": "nominatim",
+    "town": "Boranup",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/174092231",
@@ -1164,7 +1749,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6239",
+    "postcode_source": "nominatim",
+    "town": "Argyle",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/175124539",
@@ -1179,7 +1773,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6284",
+    "postcode_source": "nominatim",
+    "town": "Baudin",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/230851938",
@@ -1195,7 +1798,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6239",
+    "postcode_source": "nominatim",
+    "town": "Argyle",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/251577807",
@@ -1211,7 +1823,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6260",
+    "postcode_source": "nominatim",
+    "town": "Callcup",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/251912149",
@@ -1227,7 +1848,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6275",
+    "postcode_source": "nominatim",
+    "town": "Nannup",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/252703924",
@@ -1243,7 +1873,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6258",
+    "postcode_source": "nominatim",
+    "town": "Perup",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/259734334",
@@ -1259,7 +1898,16 @@
     "addr_city": null,
     "website": null,
     "phone": "+61 8 9771 2755",
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6260",
+    "postcode_source": "nominatim",
+    "town": "Callcup",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/368734107",
@@ -1276,7 +1924,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6258",
+    "postcode_source": "nominatim",
+    "town": "Perup",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/373433784",
@@ -1291,7 +1948,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6258",
+    "postcode_source": "nominatim",
+    "town": "Perup",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/373712042",
@@ -1306,7 +1972,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6260",
+    "postcode_source": "nominatim",
+    "town": "Callcup",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/373712044",
@@ -1321,7 +1996,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6260",
+    "postcode_source": "nominatim",
+    "town": "Callcup",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/388947549",
@@ -1336,7 +2020,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6258",
+    "postcode_source": "nominatim",
+    "town": "Perup",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/389113549",
@@ -1354,7 +2047,16 @@
     "addr_city": null,
     "website": "https://www.smithbrookwines.com.au/",
     "phone": "+61 8 9772 3557",
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6258",
+    "postcode_source": "nominatim",
+    "town": "Perup",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/390825816",
@@ -1369,7 +2071,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6260",
+    "postcode_source": "nominatim",
+    "town": "Callcup",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/390825824",
@@ -1384,7 +2095,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6260",
+    "postcode_source": "nominatim",
+    "town": "Callcup",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/391760055",
@@ -1403,7 +2123,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6260",
+    "postcode_source": "nominatim",
+    "town": "Callcup",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/398901112",
@@ -1418,7 +2147,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6260",
+    "postcode_source": "nominatim",
+    "town": "Callcup",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/398901116",
@@ -1433,7 +2171,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6260",
+    "postcode_source": "nominatim",
+    "town": "Callcup",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/402258581",
@@ -1449,7 +2196,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6260",
+    "postcode_source": "nominatim",
+    "town": "Callcup",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/403654968",
@@ -1464,7 +2220,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6260",
+    "postcode_source": "nominatim",
+    "town": "Callcup",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/403874587",
@@ -1479,7 +2244,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6260",
+    "postcode_source": "nominatim",
+    "town": "Callcup",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/404401797",
@@ -1494,7 +2268,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6260",
+    "postcode_source": "nominatim",
+    "town": "Callcup",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/406969097",
@@ -1510,7 +2293,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6260",
+    "postcode_source": "nominatim",
+    "town": "Callcup",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/410052428",
@@ -1525,7 +2317,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6260",
+    "postcode_source": "nominatim",
+    "town": "Callcup",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/433049397",
@@ -1540,7 +2341,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6256",
+    "postcode_source": "nominatim",
+    "town": "Yornup",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/433173507",
@@ -1558,7 +2368,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6394",
+    "postcode_source": "nominatim",
+    "town": "Mokup",
+    "region": "Great Southern",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/447632877",
@@ -1573,7 +2392,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6391",
+    "postcode_source": "nominatim",
+    "town": "Culbin",
+    "region": "Great Southern",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/479674170",
@@ -1590,7 +2418,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6258",
+    "postcode_source": "nominatim",
+    "town": "Perup",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/571178506",
@@ -1606,7 +2443,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6275",
+    "postcode_source": "nominatim",
+    "town": "Nannup",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/633766710",
@@ -1621,7 +2467,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6225",
+    "postcode_source": "nominatim",
+    "town": "Muja",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/693987125",
@@ -1636,7 +2491,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6239",
+    "postcode_source": "nominatim",
+    "town": "Argyle",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/774944389",
@@ -1654,7 +2518,16 @@
     "addr_city": null,
     "website": "https://www.franklandestate.com.au/",
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6397",
+    "postcode_source": "nominatim",
+    "town": "Rocky Gully",
+    "region": "Great Southern",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/881222466",
@@ -1670,7 +2543,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6282",
+    "postcode_source": "nearest",
+    "town": "Yallingup",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/1137743255",
@@ -1685,7 +2567,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6262",
+    "postcode_source": "nominatim",
+    "town": "Crowea",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/1137743257",
@@ -1702,7 +2593,16 @@
     "addr_city": null,
     "website": "https://www.hillbrookwines.com.au/index.html",
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6258",
+    "postcode_source": "nominatim",
+    "town": "Perup",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/1137771639",
@@ -1718,7 +2618,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6397",
+    "postcode_source": "nominatim",
+    "town": "Rocky Gully",
+    "region": "Great Southern",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/1137777697",
@@ -1734,7 +2643,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6396",
+    "postcode_source": "nominatim",
+    "town": "Frankland",
+    "region": "Great Southern",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/1240422945",
@@ -1749,7 +2667,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6282",
+    "postcode_source": "nominatim",
+    "town": "Yallingup",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "way/1240424399",
@@ -1764,7 +2691,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6282",
+    "postcode_source": "nearest",
+    "town": "Yallingup",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "relation/6131816",
@@ -1780,7 +2716,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6260",
+    "postcode_source": "nominatim",
+    "town": "Callcup",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "relation/6168005",
@@ -1797,7 +2742,16 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6260",
+    "postcode_source": "nominatim",
+    "town": "Callcup",
+    "region": "South West",
+    "work_categories": "cat3",
+    "category_labels": "Regional Australia",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   },
   {
     "osm_id": "relation/6824238",
@@ -1813,6 +2767,15 @@
     "addr_city": null,
     "website": null,
     "phone": null,
-    "discovered_tile": "pilot"
+    "discovered_tile": "pilot",
+    "postcode": "6284",
+    "postcode_source": "nominatim",
+    "town": "Baudin",
+    "region": "South West",
+    "work_categories": "cat3,cat5",
+    "category_labels": "Regional Australia|Natural Disaster Recovery",
+    "abn": null,
+    "abn_status": null,
+    "abn_matched_name": null
   }
 ]
