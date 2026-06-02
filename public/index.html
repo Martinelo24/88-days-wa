@@ -402,6 +402,29 @@
       color: #888;
       margin-top: 3px;
     }
+
+    .cat-badge {
+      display: inline-block;
+      padding: 2px 7px;
+      border-radius: 10px;
+      font-size: 0.72em;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .cat-cat1 { background: #d4edda; color: #155724; }   /* green  - Remote/Very Remote */
+    .cat-cat2 { background: #d1ecf1; color: #0c5460; }   /* teal   - Northern Aus */
+    .cat-cat3 { background: #cce5ff; color: #004085; }   /* blue   - Regional Aus */
+    .cat-cat4 { background: #fff3cd; color: #856404; }   /* yellow - Bushfire */
+    .cat-cat5 { background: #f8d7da; color: #721c24; }   /* red    - Natural Disaster */
+
+    .cat-legend {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      padding: 12px 15px;
+      background: #f8f9fa;
+      border-bottom: 1px solid #e9ecef;
+      font-size: 0.82em;
+    }
+    .cat-legend span { display: flex; align-items: center; gap: 5px; }
   </style>
 </head>
 <body>
@@ -434,6 +457,15 @@
       <button class="tab-button active" onclick="switchTab('postcodes')">📍 Postcodes</button>
       <button class="tab-button" onclick="switchTab('categories')">🏷️ Categories</button>
       <button class="tab-button" onclick="switchTab('businesses')">🏢 Businesses</button>
+    </div>
+
+    <div class="cat-legend">
+      <strong style="margin-right:4px;">Eligibility:</strong>
+      <span><span class="cat-badge cat-cat1">Cat 1</span> Remote &amp; Very Remote (Tourism)</span>
+      <span><span class="cat-badge cat-cat2">Cat 2</span> Northern Australia (Tourism)</span>
+      <span><span class="cat-badge cat-cat3">Cat 3</span> Regional Australia</span>
+      <span><span class="cat-badge cat-cat4">Cat 4</span> Bushfire Recovery</span>
+      <span><span class="cat-badge cat-cat5">Cat 5</span> Natural Disaster Recovery</span>
     </div>
 
     <div class="content">
@@ -472,6 +504,17 @@
   <script>
     const API = 'http://localhost:3000/api';
 
+    const CAT_FULL = {
+      cat1: 'Cat 1 — Remote & Very Remote (Tourism/Hospitality from 22 Jun 2021)',
+      cat2: 'Cat 2 — Northern Australia (Tourism/Hospitality from 22 Jun 2021)',
+      cat3: 'Cat 3 — Regional Australia (Specified work)',
+      cat4: 'Cat 4 — Bushfire Recovery (after 31 Jul 2019)',
+      cat5: 'Cat 5 — Natural Disaster Recovery (from 31 Dec 2021)',
+    };
+    function catShort(c) {
+      return { cat1:'Cat 1', cat2:'Cat 2', cat3:'Cat 3', cat4:'Cat 4', cat5:'Cat 5' }[c] || c;
+    }
+
     // Load initial data
     document.addEventListener('DOMContentLoaded', () => {
       loadStats();
@@ -509,12 +552,17 @@
           </div>
           <div id="postcodes-list" class="results-list">
             ${data.map(p => {
-              const locs = p.localities ? p.localities.split('|').slice(0,6) : [];
-              const extra = p.localities ? p.localities.split('|').length - 6 : 0;
+              const locs = p.localities ? p.localities.split('|').slice(0,5) : [];
+              const extra = p.localities ? p.localities.split('|').length - 5 : 0;
               const locsPreview = locs.join(', ') + (extra > 0 ? ` +${extra} more` : '');
+              const cats = p.work_categories ? p.work_categories.split(',') : [];
+              const catBadges = cats.map(c => `<span class="cat-badge cat-${c}">${catShort(c)}</span>`).join('');
               return `
               <div class="result-item" onclick="showPostcodeDetail('${p.postcode}')">
-                <h3>${p.postcode} — ${p.town} <span style="font-weight:400; color:#888; font-size:0.85em;">${p.region}</span></h3>
+                <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:8px;">
+                  <h3>${p.postcode} — ${p.town} <span style="font-weight:400; color:#888; font-size:0.85em;">${p.region}</span></h3>
+                  <div style="display:flex; gap:4px; flex-wrap:wrap; flex-shrink:0;">${catBadges}</div>
+                </div>
                 ${locsPreview ? `<p class="localities-preview">Also: ${locsPreview}</p>` : ''}
               </div>`;
             }).join('')}
@@ -693,6 +741,19 @@
                 <div class="detail-value">${pc.eligible_88days ? '✓ Yes' : '✗ No'}</div>
               </div>
             </div>
+
+            ${pc.work_categories ? `
+            <div style="margin-top:14px; background:white; padding:12px; border-radius:4px; border:1px solid #e9ecef;">
+              <div class="detail-label" style="margin-bottom:8px;">ELIGIBLE WORK CATEGORIES</div>
+              <div style="display:flex; flex-direction:column; gap:6px;">
+                ${pc.work_categories.split(',').map(c => `
+                  <div style="display:flex; align-items:center; gap:8px;">
+                    <span class="cat-badge cat-${c}">${catShort(c)}</span>
+                    <span style="font-size:0.9em; color:#444;">${CAT_FULL[c] || c}</span>
+                  </div>
+                `).join('')}
+              </div>
+            </div>` : ''}
 
             ${localities.length > 1 ? `
             <div style="margin-top:14px; background:white; padding:12px; border-radius:4px; border:1px solid #e9ecef;">
