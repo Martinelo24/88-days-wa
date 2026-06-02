@@ -1,0 +1,262 @@
+[
+  {
+    "osm_id": "node/9097334272",
+    "name": "Darkan Agri services",
+    "lat": -33.3367612,
+    "lon": 116.7420565,
+    "tags": {
+      "name": "Darkan Agri services",
+      "shop": "farm"
+    },
+    "addr_postcode": null,
+    "addr_city": null,
+    "website": null,
+    "phone": null,
+    "discovered_tile": "SW Inland"
+  },
+  {
+    "osm_id": "way/37523769",
+    "name": "Hoddells Farm",
+    "lat": -33.4363916,
+    "lon": 116.1792015,
+    "tags": {
+      "landuse": "farmland",
+      "name": "Hoddells Farm"
+    },
+    "addr_postcode": null,
+    "addr_city": null,
+    "website": null,
+    "phone": null,
+    "discovered_tile": "SW Inland"
+  },
+  {
+    "osm_id": "way/37523892",
+    "name": "Cardiff Farms",
+    "lat": -33.425299,
+    "lon": 116.1976854,
+    "tags": {
+      "landuse": "farmland",
+      "name": "Cardiff Farms"
+    },
+    "addr_postcode": null,
+    "addr_city": null,
+    "website": null,
+    "phone": null,
+    "discovered_tile": "SW Inland"
+  },
+  {
+    "osm_id": "way/37524035",
+    "name": "Hoddell Farm 2",
+    "lat": -33.4454675,
+    "lon": 116.1713025,
+    "tags": {
+      "landuse": "farmland",
+      "name": "Hoddell Farm 2"
+    },
+    "addr_postcode": null,
+    "addr_city": null,
+    "website": null,
+    "phone": null,
+    "discovered_tile": "SW Inland"
+  },
+  {
+    "osm_id": "way/37524551",
+    "name": "Schultz Farm",
+    "lat": -33.3911648,
+    "lon": 116.1670943,
+    "tags": {
+      "landuse": "farmland",
+      "name": "Schultz Farm"
+    },
+    "addr_postcode": null,
+    "addr_city": null,
+    "website": null,
+    "phone": null,
+    "discovered_tile": "SW Inland"
+  },
+  {
+    "osm_id": "way/38223901",
+    "name": "Dannys Farm",
+    "lat": -33.294744,
+    "lon": 116.1487492,
+    "tags": {
+      "landuse": "farmland",
+      "name": "Dannys Farm"
+    },
+    "addr_postcode": null,
+    "addr_city": null,
+    "website": null,
+    "phone": null,
+    "discovered_tile": "SW Inland"
+  },
+  {
+    "osm_id": "way/44162409",
+    "name": "Yabberup Farms",
+    "lat": -33.4614945,
+    "lon": 116.0153818,
+    "tags": {
+      "landuse": "farmland",
+      "name": "Yabberup Farms"
+    },
+    "addr_postcode": null,
+    "addr_city": null,
+    "website": null,
+    "phone": null,
+    "discovered_tile": "SW Inland"
+  },
+  {
+    "osm_id": "way/44162967",
+    "name": "Yabberup Farms",
+    "lat": -33.4765372,
+    "lon": 116.0125343,
+    "tags": {
+      "landuse": "farmland",
+      "name": "Yabberup Farms"
+    },
+    "addr_postcode": null,
+    "addr_city": null,
+    "website": null,
+    "phone": null,
+    "discovered_tile": "SW Inland"
+  },
+  {
+    "osm_id": "way/55896343",
+    "name": "Banjos Farm",
+    "lat": -33.2170538,
+    "lon": 116.2964614,
+    "tags": {
+      "landuse": "farmland",
+      "name": "Banjos Farm"
+    },
+    "addr_postcode": null,
+    "addr_city": null,
+    "website": null,
+    "phone": null,
+    "discovered_tile": "SW Inland"
+  },
+  {
+    "osm_id": "way/88812840",
+    "name": "Martin Farm",
+    "lat": -33.2160865,
+    "lon": 116.2559426,
+    "tags": {
+      "landuse": "farmland",
+      "name": "Martin Farm"
+    },
+    "addr_postcode": null,
+    "addr_city": null,
+    "website": null,
+    "phone": null,
+    "discovered_tile": "SW Inland"
+  },
+  {
+    "osm_id": "way/92551861",
+    "name": "CSIRO Saline Study Area",
+    "lat": -33.2978585,
+    "lon": 116.4116643,
+    "tags": {
+      "landuse": "farmland",
+      "name": "CSIRO Saline Study Area"
+    },
+    "addr_postcode": null,
+    "addr_city": null,
+    "website": null,
+    "phone": null,
+    "discovered_tile": "SW Inland"
+  },
+  {
+    "osm_id": "way/174092231",
+    "name": "Pecan Nuts",
+    "lat": -33.5306703,
+    "lon": 116.1044054,
+    "tags": {
+      "landuse": "orchard",
+      "name": "Pecan Nuts",
+      "trees": "pecan_trees"
+    },
+    "addr_postcode": null,
+    "addr_city": null,
+    "website": null,
+    "phone": null,
+    "discovered_tile": "SW Inland"
+  },
+  {
+    "osm_id": "way/230851938",
+    "name": "Pecan Nuts",
+    "lat": -33.5310468,
+    "lon": 116.0969073,
+    "tags": {
+      "landuse": "orchard",
+      "name": "Pecan Nuts",
+      "trees": "pecan_trees"
+    },
+    "addr_postcode": null,
+    "addr_city": null,
+    "website": null,
+    "phone": null,
+    "discovered_tile": "SW Inland"
+  },
+  {
+    "osm_id": "way/433049397",
+    "name": "Killinchy Wines",
+    "lat": -34.0449453,
+    "lon": 116.22401,
+    "tags": {
+      "landuse": "vineyard",
+      "name": "Killinchy Wines"
+    },
+    "addr_postcode": null,
+    "addr_city": null,
+    "website": null,
+    "phone": null,
+    "discovered_tile": "SW Inland"
+  },
+  {
+    "osm_id": "way/433173507",
+    "name": "Sandawindy",
+    "lat": -33.6083529,
+    "lon": 116.8535636,
+    "tags": {
+      "barrier": "fence",
+      "crop": "fast_growing_wood",
+      "fence_type": "wire",
+      "landuse": "farmland",
+      "name": "Sandawindy"
+    },
+    "addr_postcode": null,
+    "addr_city": null,
+    "website": null,
+    "phone": null,
+    "discovered_tile": "SW Inland"
+  },
+  {
+    "osm_id": "way/447632877",
+    "name": "Bingham River Arboretum",
+    "lat": -33.2184764,
+    "lon": 116.4549623,
+    "tags": {
+      "landuse": "farmland",
+      "name": "Bingham River Arboretum"
+    },
+    "addr_postcode": null,
+    "addr_city": null,
+    "website": null,
+    "phone": null,
+    "discovered_tile": "SW Inland"
+  },
+  {
+    "osm_id": "way/633766710",
+    "name": "282",
+    "lat": -33.2012232,
+    "lon": 116.2766952,
+    "tags": {
+      "landuse": "farmland",
+      "name": "282"
+    },
+    "addr_postcode": null,
+    "addr_city": null,
+    "website": null,
+    "phone": null,
+    "discovered_tile": "SW Inland"
+  }
+]

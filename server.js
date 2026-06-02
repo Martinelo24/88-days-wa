@@ -109,16 +109,15 @@ app.get('/api/categories/:id', (req, res) => {
   });
 });
 
-// Get all businesses
+// Get APPROVED businesses (the public dataset — verified = 1 only)
 app.get('/api/businesses', (req, res) => {
   const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 20;
   const offset = (page - 1) * limit;
-  const { verified, town, category } = req.query;
+  const { town, category } = req.query;
 
-  let where = 'WHERE 1=1';
+  let where = 'WHERE verified = 1';
   let params = [];
-  if (verified !== undefined) { where += ' AND verified = ?'; params.push(verified === 'true' ? 1 : 0); }
   if (town)     { where += ' AND town = ?';            params.push(town); }
   if (category) { where += ' AND job_category_id = ?'; params.push(category); }
 
@@ -131,17 +130,98 @@ app.get('/api/businesses', (req, res) => {
   });
 });
 
+// ============ REVIEW QUEUE (human verification gate) ============
+
+// Get candidates awaiting review, sorted by confidence (highest first)
+app.get('/api/review/queue', (req, res) => {
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 20;
+  const offset = (page - 1) * limit;
+  const status = req.query.status || 'pending';
+
+  const where = 'WHERE review_status = ?';
+  const params = [status];
+
+  db.get(`SELECT COUNT(*) as count FROM businesses ${where}`, params, (err, row) => {
+    if (err) return res.status(500).json({ error: err.message });
+    db.all(
+      `SELECT * FROM businesses ${where}
+       ORDER BY confidence_score DESC, business_name ASC
+       LIMIT ? OFFSET ?`,
+      [...params, limit, offset],
+      (err, rows) => {
+        if (err) return res.status(500).json({ error: err.message });
+        res.json({ data: rows || [], pagination: { page, limit, total: row.count, totalPages: Math.ceil(row.count / limit) } });
+      }
+    );
+  });
+});
+
+// Approve a candidate → becomes part of the public dataset
+app.post('/api/review/:id/approve', (req, res) => {
+  db.run(
+    `UPDATE businesses
+     SET review_status = 'approved', verified = 1, verified_date = CURRENT_TIMESTAMP, updated_at = CURRENT_TIMESTAMP
+     WHERE id = ?`,
+    [req.params.id],
+    function (err) {
+      if (err) return res.status(500).json({ error: err.message });
+      if (this.changes === 0) return res.status(404).json({ error: 'Not found' });
+      res.json({ success: true, id: req.params.id, review_status: 'approved' });
+    }
+  );
+});
+
+// Reject a candidate → hidden from queue, never public
+app.post('/api/review/:id/reject', (req, res) => {
+  db.run(
+    `UPDATE businesses
+     SET review_status = 'rejected', verified = 0, updated_at = CURRENT_TIMESTAMP
+     WHERE id = ?`,
+    [req.params.id],
+    function (err) {
+      if (err) return res.status(500).json({ error: err.message });
+      if (this.changes === 0) return res.status(404).json({ error: 'Not found' });
+      res.json({ success: true, id: req.params.id, review_status: 'rejected' });
+    }
+  );
+});
+
+// Edit a business's correctable fields (used from the review queue)
+app.patch('/api/businesses/:id', (req, res) => {
+  const allowed = ['business_name', 'postcode', 'town', 'region', 'job_category_id',
+                   'job_category_name', 'website_url', 'phone_number', 'hiring_status', 'notes'];
+  const sets = [];
+  const params = [];
+  for (const field of allowed) {
+    if (field in req.body) { sets.push(`${field} = ?`); params.push(req.body[field]); }
+  }
+  if (!sets.length) return res.status(400).json({ error: 'No editable fields supplied' });
+  params.push(req.params.id);
+
+  db.run(
+    `UPDATE businesses SET ${sets.join(', ')}, updated_at = CURRENT_TIMESTAMP WHERE id = ?`,
+    params,
+    function (err) {
+      if (err) return res.status(500).json({ error: err.message });
+      if (this.changes === 0) return res.status(404).json({ error: 'Not found' });
+      res.json({ success: true, id: req.params.id });
+    }
+  );
+});
+
 // Get database stats
 app.get('/api/stats', (req, res) => {
   db.get(`
     SELECT
       (SELECT COUNT(*) FROM postcodes) as postcodes,
       (SELECT COUNT(*) FROM job_categories) as categories,
-      (SELECT COUNT(*) FROM businesses) as businesses,
-      (SELECT COUNT(*) FROM businesses WHERE verified = 1) as verified_businesses
+      (SELECT COUNT(*) FROM businesses WHERE verified = 1) as businesses,
+      (SELECT COUNT(*) FROM businesses WHERE verified = 1) as verified_businesses,
+      (SELECT COUNT(*) FROM businesses WHERE review_status = 'pending') as pending_review
   `, (err, row) => {
     if (err) return res.status(500).json({ error: err.message });
-    res.json(row || { postcodes: 0, categories: 0, businesses: 0, verified_businesses: 0 });
+    res.json(row || { postcodes: 0, categories: 0, businesses: 0, verified_businesses: 0, pending_review: 0 });
   });
 });
 

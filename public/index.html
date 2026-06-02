@@ -425,6 +425,49 @@
       font-size: 0.82em;
     }
     .cat-legend span { display: flex; align-items: center; gap: 5px; }
+
+    /* ── Review queue cards ── */
+    .review-card {
+      border: 1px solid #e9ecef;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 14px;
+      background: white;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .review-card h3 { color: #333; margin-bottom: 6px; }
+    .review-meta { font-size: 0.88em; color: #555; margin: 2px 0; }
+    .review-meta a { color: #667eea; }
+
+    .conf-bar {
+      height: 8px; border-radius: 4px; background: #e9ecef;
+      overflow: hidden; margin-top: 6px; width: 180px;
+    }
+    .conf-fill { height: 100%; border-radius: 4px; }
+    .conf-high { background: #28a745; }
+    .conf-mid  { background: #ffc107; }
+    .conf-low  { background: #dc3545; }
+
+    .src-badge {
+      display:inline-block; padding:2px 8px; border-radius:10px;
+      font-size:0.72em; font-weight:600; margin-right:4px;
+    }
+    .src-osm { background:#cce5ff; color:#004085; }
+    .src-abn { background:#d4edda; color:#155724; }
+    .src-google { background:#f8d7da; color:#721c24; }
+
+    .review-actions { display:flex; gap:8px; margin-top:12px; flex-wrap:wrap; }
+    .btn-approve { background:#28a745; color:white; border:none; padding:8px 16px; border-radius:5px; cursor:pointer; font-weight:600; }
+    .btn-approve:hover { background:#218838; }
+    .btn-reject { background:#dc3545; color:white; border:none; padding:8px 16px; border-radius:5px; cursor:pointer; font-weight:600; }
+    .btn-reject:hover { background:#c82333; }
+    .btn-edit { background:#f1f3f5; color:#333; border:1px solid #ddd; padding:8px 16px; border-radius:5px; cursor:pointer; font-weight:500; }
+    .btn-edit:hover { background:#e9ecef; }
+
+    .review-edit { margin-top:12px; padding:12px; background:#fff8e1; border:1px solid #ffe082; border-radius:6px; display:none; }
+    .review-edit label { display:block; font-size:0.8em; color:#666; margin:6px 0 2px; }
+    .review-edit input, .review-edit select { width:100%; padding:7px 10px; border:1px solid #ddd; border-radius:4px; font-size:0.9em; }
+    .review-edit-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
   </style>
 </head>
 <body>
@@ -449,7 +492,11 @@
       </div>
       <div class="stat">
         <span class="stat-value" id="stat-verified">-</span>
-        <span class="stat-label">Verified</span>
+        <span class="stat-label">Verified (Live)</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value" id="stat-pending" style="color:#e0a800;">-</span>
+        <span class="stat-label">Awaiting Review</span>
       </div>
     </div>
 
@@ -457,6 +504,7 @@
       <button class="tab-button active" onclick="switchTab('postcodes')">📍 Postcodes</button>
       <button class="tab-button" onclick="switchTab('categories')">🏷️ Categories</button>
       <button class="tab-button" onclick="switchTab('businesses')">🏢 Businesses</button>
+      <button class="tab-button" onclick="switchTab('review')">🔍 Review Queue</button>
     </div>
 
     <div class="cat-legend">
@@ -498,6 +546,12 @@
         <div id="businesses-list"></div>
         <div id="businesses-pagination" class="pagination"></div>
       </div>
+
+      <!-- REVIEW QUEUE TAB -->
+      <div id="review" class="tab-pane">
+        <div id="review-list"></div>
+        <div id="review-pagination" class="pagination"></div>
+      </div>
     </div>
   </div>
 
@@ -531,6 +585,8 @@
         document.getElementById('stat-categories').textContent = data.categories;
         document.getElementById('stat-businesses').textContent = data.businesses;
         document.getElementById('stat-verified').textContent = data.verified_businesses;
+        const pendingEl = document.getElementById('stat-pending');
+        if (pendingEl) pendingEl.textContent = data.pending_review ?? 0;
       } catch (e) {
         console.error('Error loading stats:', e);
       }
@@ -918,6 +974,9 @@
       if (tabName === 'businesses' && !document.getElementById('businesses-list').innerHTML) {
         loadBusinesses();
       }
+      if (tabName === 'review') {
+        loadReviewQueue();
+      }
     }
 
     // Pagination
@@ -979,8 +1038,168 @@
       } else if (stateType === 'businesses') {
         businessState.page = pageNum;
         loadBusinesses();
+      } else if (stateType === 'review') {
+        reviewState.page = pageNum;
+        loadReviewQueue();
       }
       document.documentElement.scrollTop = 0;
+    }
+
+    // ── REVIEW QUEUE ──────────────────────────────────────────────
+    let reviewState = { page: 1, limit: 20 };
+    let categoryCache = null;
+
+    async function getCategories() {
+      if (categoryCache) return categoryCache;
+      const res = await fetch(`${API}/categories`);
+      const { data } = await res.json();
+      categoryCache = data;
+      return data;
+    }
+
+    function confClass(score) {
+      if (score >= 70) return 'conf-high';
+      if (score >= 45) return 'conf-mid';
+      return 'conf-low';
+    }
+
+    async function loadReviewQueue() {
+      const { page, limit } = reviewState;
+      document.getElementById('review-list').innerHTML = '<div class="loading"></div>';
+      try {
+        const [res, cats] = await Promise.all([
+          fetch(`${API}/review/queue?status=pending&page=${page}&limit=${limit}`),
+          getCategories()
+        ]);
+        const { data, pagination } = await res.json();
+
+        if (!data.length) {
+          document.getElementById('review-list').innerHTML =
+            '<div class="empty-state"><p>🎉 Review queue is empty</p>' +
+            '<p>Run <code>npm run scrape:pilot</code> to discover candidates, then refresh.</p></div>';
+          document.getElementById('review-pagination').innerHTML = '';
+          return;
+        }
+
+        const catOptions = cats.map(c =>
+          `<option value="${c.id}">${c.category_name}</option>`).join('');
+
+        document.getElementById('review-list').innerHTML = data.map(b => {
+          const srcBadges = (b.sources || '').split(',').filter(Boolean)
+            .map(s => `<span class="src-badge src-${s}">${s.toUpperCase()}</span>`).join('');
+          const pcSrc = b.source_found ? b.source_found.replace('osm:', 'OSM · ') : '';
+          const mapsQuery = encodeURIComponent(`${b.business_name} ${b.town} WA ${b.postcode}`);
+          return `
+          <div class="review-card" id="card-${b.id}">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px; flex-wrap:wrap;">
+              <div>
+                <h3>${b.business_name}</h3>
+                <div class="review-meta">📍 <strong>${b.postcode}</strong> ${b.town} · ${b.region || ''} · <em>${b.job_category_name || 'uncategorised'}</em></div>
+                <div class="review-meta">${srcBadges} ${b.abn ? `ABN ${b.abn} <span style="color:#155724;">(${b.abn_status})</span>` : '<span style="color:#999;">no ABN match</span>'}</div>
+                <div class="review-meta">
+                  ${b.website_url ? `🔗 <a href="${b.website_url}" target="_blank">${b.website_url}</a>` : ''}
+                  ${b.phone_number ? ` · 📞 ${b.phone_number}` : ''}
+                </div>
+                <div class="review-meta">
+                  🔎 <a href="https://www.google.com/search?q=${mapsQuery}" target="_blank">Google this business</a>
+                  · <a href="https://www.google.com/maps/search/?api=1&query=${b.latitude},${b.longitude}" target="_blank">View on map</a>
+                  <span style="color:#aaa;"> · ${pcSrc}</span>
+                </div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-size:1.4em; font-weight:700; color:#333;">${b.confidence_score}<span style="font-size:0.5em; color:#999;">/100</span></div>
+                <div class="conf-bar"><div class="conf-fill ${confClass(b.confidence_score)}" style="width:${b.confidence_score}%;"></div></div>
+              </div>
+            </div>
+
+            <div class="review-actions">
+              <button class="btn-approve" onclick="approveBusiness(${b.id})">✓ Approve</button>
+              <button class="btn-edit" onclick="toggleEdit(${b.id})">✎ Edit</button>
+              <button class="btn-reject" onclick="rejectBusiness(${b.id})">✗ Reject</button>
+            </div>
+
+            <div class="review-edit" id="edit-${b.id}">
+              <div class="review-edit-grid">
+                <div><label>Business name</label><input id="e-name-${b.id}" value="${(b.business_name||'').replace(/"/g,'&quot;')}"></div>
+                <div><label>Category</label><select id="e-cat-${b.id}">${catOptions}</select></div>
+                <div><label>Postcode</label><input id="e-pc-${b.id}" value="${b.postcode||''}"></div>
+                <div><label>Town</label><input id="e-town-${b.id}" value="${(b.town||'').replace(/"/g,'&quot;')}"></div>
+                <div><label>Website</label><input id="e-web-${b.id}" value="${(b.website_url||'').replace(/"/g,'&quot;')}"></div>
+                <div><label>Phone</label><input id="e-phone-${b.id}" value="${(b.phone_number||'').replace(/"/g,'&quot;')}"></div>
+              </div>
+              <div style="margin-top:10px; display:flex; gap:8px;">
+                <button class="btn-approve" onclick="saveAndApprove(${b.id})">💾 Save &amp; Approve</button>
+                <button class="btn-edit" onclick="saveEdit(${b.id})">Save only</button>
+                <button class="btn-edit" onclick="toggleEdit(${b.id})">Cancel</button>
+              </div>
+            </div>
+          </div>`;
+        }).join('');
+
+        // preselect category in each edit dropdown
+        data.forEach(b => {
+          const sel = document.getElementById(`e-cat-${b.id}`);
+          if (sel && b.job_category_id) sel.value = b.job_category_id;
+        });
+
+        updatePagination('review-pagination', pagination, 'review', 'loadReviewQueue');
+      } catch (e) {
+        console.error('Review queue error:', e);
+        document.getElementById('review-list').innerHTML = '<div class="empty-state"><p>Error loading queue</p></div>';
+      }
+    }
+
+    function toggleEdit(id) {
+      const el = document.getElementById(`edit-${id}`);
+      el.style.display = el.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function removeCard(id) {
+      const card = document.getElementById(`card-${id}`);
+      if (card) { card.style.transition = 'opacity .3s'; card.style.opacity = '0'; setTimeout(() => card.remove(), 300); }
+    }
+
+    async function approveBusiness(id) {
+      const res = await fetch(`${API}/review/${id}/approve`, { method: 'POST' });
+      if (res.ok) { removeCard(id); loadStats(); }
+      else alert('Approve failed');
+    }
+
+    async function rejectBusiness(id) {
+      const res = await fetch(`${API}/review/${id}/reject`, { method: 'POST' });
+      if (res.ok) { removeCard(id); loadStats(); }
+      else alert('Reject failed');
+    }
+
+    function gatherEdit(id) {
+      const catSel = document.getElementById(`e-cat-${id}`);
+      return {
+        business_name: document.getElementById(`e-name-${id}`).value.trim(),
+        job_category_id: parseInt(catSel.value),
+        job_category_name: catSel.options[catSel.selectedIndex].text,
+        postcode: document.getElementById(`e-pc-${id}`).value.trim(),
+        town: document.getElementById(`e-town-${id}`).value.trim(),
+        website_url: document.getElementById(`e-web-${id}`).value.trim(),
+        phone_number: document.getElementById(`e-phone-${id}`).value.trim(),
+      };
+    }
+
+    async function saveEdit(id) {
+      const res = await fetch(`${API}/businesses/${id}`, {
+        method: 'PATCH', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(gatherEdit(id))
+      });
+      if (res.ok) { toggleEdit(id); loadReviewQueue(); }
+      else alert('Save failed');
+    }
+
+    async function saveAndApprove(id) {
+      const r1 = await fetch(`${API}/businesses/${id}`, {
+        method: 'PATCH', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(gatherEdit(id))
+      });
+      if (!r1.ok) return alert('Save failed');
+      await approveBusiness(id);
     }
   </script>
 </body>
