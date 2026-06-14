@@ -16,14 +16,20 @@
     "scrape:pilot": "node scrapers/1_discover_osm.js && node scrapers/2_assign_postcode.js && node scrapers/3_validate_abn.js && node scrapers/4_score_and_load.js",
     "build": "npm rebuild sqlite3 --build-from-source"
   },
-  "keywords": ["88days", "western-australia", "backpackers", "jobs"],
+  "keywords": [
+    "88days",
+    "western-australia",
+    "backpackers",
+    "jobs"
+  ],
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.18.2",
-    "sqlite3": "^5.1.6",
+    "better-sqlite3": "^12.10.1",
     "cors": "^2.8.5",
-    "csv-parse": "^5.4.1"
+    "csv-parse": "^5.4.1",
+    "express": "^4.18.2",
+    "sqlite3": "^5.1.6"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
