@@ -35,28 +35,47 @@ const TILES = [
  * OSM tag → our job_categories mapping.
  * `category_id` values match the job_categories table.
  * `default` is the starting category; step 4 refines via name keywords.
+ *
+ * NOTE: Wineries (craft:winery, tourism:winery) are explicitly excluded because
+ * they are secondary processors (winemaking, not grape-picking).
  */
 const OSM_TAG_RULES = [
   { match: { landuse: 'orchard' },        category_id: 1, category_name: 'Fruit Orchard' },
   { match: { landuse: 'vineyard' },       category_id: 2, category_name: 'Grape Vineyard' },
   { match: { landuse: 'plant_nursery' },  category_id: 5, category_name: 'Nursery & Horticulture' },
-  { match: { tourism: 'winery' },         category_id: 2, category_name: 'Grape Vineyard' },
-  { match: { craft: 'winery' },           category_id: 2, category_name: 'Grape Vineyard' },
+  // REMOVED: tourism:winery and craft:winery — these are secondary processors (winemaking), not eligible.
   { match: { shop: 'farm' },              category_id: 5, category_name: 'Nursery & Horticulture' },
   { match: { landuse: 'farmland' },       category_id: 4, category_name: 'Livestock Farm' },
   { match: { landuse: 'meadow' },         category_id: 4, category_name: 'Livestock Farm' },
 ];
 
 /**
+ * EXCLUSION keywords: if a business name matches any of these, skip it entirely
+ * (secondary processing, never eligible per government rules).
+ * Checked BEFORE category assignment to ensure secondary processors never make it through.
+ */
+const EXCLUSION_KEYWORDS = [
+  'winery', 'wine', 'wines', 'winemaking', 'cellar door', 'cellar',
+  'cider', 'cidery',
+  'brewery', 'brewer', 'brewing',
+  'distillery', 'distill',
+  'mill', 'milling',
+  'cheese', 'cheesemaker',
+  'production facility', 'processor', 'processing plant', 'manufacturing',
+  'factory',
+];
+
+/**
  * Name-keyword refinement applied in step 4 (overrides the tag default when a keyword hits).
  * Order matters — first match wins.
+ * NOTE: Secondary processing keywords are in EXCLUSION_KEYWORDS instead and checked separately.
  */
 const NAME_KEYWORD_RULES = [
-  { keywords: ['vineyard', 'winery', 'wines', 'estate wine', 'cellar'], category_id: 2, category_name: 'Grape Vineyard' },
+  { keywords: ['vineyard', 'grape'], category_id: 2, category_name: 'Grape Vineyard' },
   { keywords: ['orchard', 'apple', 'cherry', 'stone fruit', 'citrus', 'avocado', 'mango', 'berry', 'berries'], category_id: 1, category_name: 'Fruit Orchard' },
   { keywords: ['nursery', 'greenhouse', 'glasshouse', 'seedling'], category_id: 5, category_name: 'Nursery & Horticulture' },
   { keywords: ['dairy', 'cattle', 'beef', 'sheep', 'wool', 'livestock', 'station', 'pastoral', 'poultry', 'piggery'], category_id: 4, category_name: 'Livestock Farm' },
-  { keywords: ['vegetable', 'veg ', 'potato', 'onion', 'market garden', 'produce'], category_id: 3, category_name: 'Vegetable Farm' },
+  { keywords: ['vegetable', 'veg ', 'potato', 'onion', 'market garden', 'fresh produce'], category_id: 3, category_name: 'Vegetable Farm' },
 ];
 
 // Overpass endpoints (try in order if one is busy)
@@ -74,6 +93,7 @@ module.exports = {
   TILES,
   OSM_TAG_RULES,
   NAME_KEYWORD_RULES,
+  EXCLUSION_KEYWORDS,
   OVERPASS_ENDPOINTS,
   NOMINATIM_URL,
   USER_AGENT,

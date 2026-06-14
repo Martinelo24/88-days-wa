@@ -5,7 +5,7 @@ const cors = require('cors');
 const { evaluate } = require('./lib/eligibility');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors());
@@ -226,19 +226,20 @@ app.patch('/api/businesses/:id', (req, res) => {
       if (err) return res.status(500).json({ error: err.message });
       if (this.changes === 0) return res.status(404).json({ error: 'Not found' });
 
-      // If the category or postcode was edited, re-evaluate eligibility from scratch.
+      // If the category, postcode, or name was edited, re-evaluate eligibility from scratch.
       const touchedCat = 'job_category_id' in req.body;
       const touchedPc = 'postcode' in req.body;
-      if (!touchedCat && !touchedPc) return res.json({ success: true, id: req.params.id });
+      const touchedName = 'business_name' in req.body;
+      if (!touchedCat && !touchedPc && !touchedName) return res.json({ success: true, id: req.params.id });
 
       db.get(
-        `SELECT b.job_category_id, p.work_categories
+        `SELECT b.business_name, b.job_category_id, p.work_categories
          FROM businesses b LEFT JOIN postcodes p ON b.postcode = p.postcode
          WHERE b.id = ?`,
         [req.params.id],
         (e, r) => {
           if (e || !r) return res.json({ success: true, id: req.params.id });
-          const v = evaluate(r.job_category_id, r.work_categories);
+          const v = evaluate(r.job_category_id, r.work_categories, r.business_name);
           const verdict = v.eligible === true ? 'eligible' : v.eligible === false ? 'mismatch' : null;
           db.run(
             'UPDATE businesses SET eligibility = ?, eligibility_reason = ? WHERE id = ?',

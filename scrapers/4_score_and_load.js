@@ -16,7 +16,7 @@
 const fs = require('fs');
 const path = require('path');
 const sqlite3 = require('sqlite3').verbose();
-const { paths, OSM_TAG_RULES, NAME_KEYWORD_RULES } = require('./config');
+const { paths, OSM_TAG_RULES, NAME_KEYWORD_RULES, EXCLUSION_KEYWORDS } = require('./config');
 const { evaluate } = require('../lib/eligibility');
 
 const dbPath = path.join(__dirname, '../data/88days.db');
@@ -28,6 +28,15 @@ function categoryFromTags(tags) {
     if (tags[k] === v) return { id: rule.category_id, name: rule.category_name };
   }
   return { id: null, name: null };
+}
+
+/** Check if a business name matches exclusion keywords (secondary processing). */
+function isExcluded(name) {
+  const lower = (name || '').toLowerCase();
+  for (const keyword of EXCLUSION_KEYWORDS) {
+    if (lower.includes(keyword)) return keyword;
+  }
+  return null;
 }
 
 /** Refine category by name keywords (overrides tag default on hit). */
@@ -82,18 +91,25 @@ function scoreCandidate(c) {
     VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,'pending',0)
   `);
 
-  let loaded = 0, skippedDup = 0, mismatches = 0;
+  let loaded = 0, skippedDup = 0, skippedExcluded = 0, mismatches = 0;
   await new Promise((resolve) => {
     db.serialize(() => {
       for (const c of validated) {
         if (existingOsm.has(c.osm_id)) { skippedDup++; continue; }
+
+        // Check for secondary processing (wineries, distilleries, etc.) — skip entirely.
+        const excludedKeyword = isExcluded(c.name);
+        if (excludedKeyword) {
+          skippedExcluded++;
+          continue;
+        }
 
         const tagCat = categoryFromTags(c.tags || {});
         const cat = refineByName(c.name, tagCat);
         const { score, sources } = scoreCandidate(c);
 
         // Eligibility guard: does this work type match the postcode's categories?
-        const elig = evaluate(cat.id, c.work_categories);
+        const elig = evaluate(cat.id, c.work_categories, c.name);
         const verdict = elig.eligible === true ? 'eligible' : elig.eligible === false ? 'mismatch' : null;
         if (verdict === 'mismatch') mismatches++;
 
@@ -138,6 +154,7 @@ function scoreCandidate(c) {
   db.close();
   console.log(`  Loaded:  ${loaded}`);
   console.log(`  Skipped (duplicate name+postcode or osm_id): ${skippedDup}`);
+  console.log(`  Excluded (secondary processing: wineries, cider, breweries, etc.): ${skippedExcluded}`);
   console.log(`  ⚠️  Eligibility mismatches (work type ≠ postcode category): ${mismatches} — hidden from queue by default`);
   console.log(`\n✅ Pending review queue now holds ${total} candidates.`);
   console.log(`   Open http://localhost:3000 → Review Queue tab to verify them.`);

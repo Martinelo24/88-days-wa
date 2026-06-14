@@ -10,7 +10,7 @@ const { evaluate } = require('../lib/eligibility');
 const db = new sqlite3.Database(path.join(__dirname, '../data/88days.db'));
 
 db.all(
-  `SELECT b.id, b.job_category_id, p.work_categories
+  `SELECT b.id, b.business_name, b.job_category_id, p.work_categories
    FROM businesses b
    LEFT JOIN postcodes p ON b.postcode = p.postcode`,
   (err, rows) => {
@@ -21,7 +21,7 @@ db.all(
 
     db.serialize(() => {
       for (const r of rows) {
-        const v = evaluate(r.job_category_id, r.work_categories);
+        const v = evaluate(r.job_category_id, r.work_categories, r.business_name);
         const verdict = v.eligible === true ? 'eligible' : v.eligible === false ? 'mismatch' : null;
         if (verdict === 'eligible') eligible++;
         else if (verdict === 'mismatch') mismatch++;
