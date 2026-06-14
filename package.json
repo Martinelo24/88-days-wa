@@ -13,7 +13,8 @@
     "scrape:locate": "node scrapers/2_assign_postcode.js",
     "scrape:validate": "node scrapers/3_validate_abn.js",
     "scrape:load": "node scrapers/4_score_and_load.js",
-    "scrape:pilot": "node scrapers/1_discover_osm.js && node scrapers/2_assign_postcode.js && node scrapers/3_validate_abn.js && node scrapers/4_score_and_load.js"
+    "scrape:pilot": "node scrapers/1_discover_osm.js && node scrapers/2_assign_postcode.js && node scrapers/3_validate_abn.js && node scrapers/4_score_and_load.js",
+    "build": "npm rebuild sqlite3 --build-from-source"
   },
   "keywords": ["88days", "western-australia", "backpackers", "jobs"],
   "author": "",
