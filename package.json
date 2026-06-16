@@ -14,6 +14,12 @@
     "scrape:validate": "node scrapers/3_validate_abn.js",
     "scrape:load": "node scrapers/4_score_and_load.js",
     "scrape:pilot": "node scrapers/1_discover_osm.js && node scrapers/2_assign_postcode.js && node scrapers/3_validate_abn.js && node scrapers/4_score_and_load.js",
+    "scrape:6701": "node scrapers/1_discover_osm.js --region=6701 && node scrapers/2_assign_postcode.js && node scrapers/3_validate_abn.js && node scrapers/4_score_and_load.js --region=6701",
+    "scrape:6707": "node scrapers/1_discover_osm.js --region=6707 && node scrapers/2_assign_postcode.js && node scrapers/3_validate_abn.js && node scrapers/4_score_and_load.js --region=6707",
+    "scrape:6714": "node scrapers/1_discover_osm.js --region=6714 && node scrapers/2_assign_postcode.js && node scrapers/3_validate_abn.js && node scrapers/4_score_and_load.js --region=6714",
+    "scrape:6536": "node scrapers/1_discover_osm.js --region=6536 && node scrapers/2_assign_postcode.js && node scrapers/3_validate_abn.js && node scrapers/4_score_and_load.js --region=6536",
+    "scrape:6721": "node scrapers/1_discover_osm.js --region=6721 && node scrapers/2_assign_postcode.js && node scrapers/3_validate_abn.js && node scrapers/4_score_and_load.js --region=6721",
+    "scrape:6725": "node scrapers/1_discover_osm.js --region=6725 && node scrapers/2_assign_postcode.js && node scrapers/3_validate_abn.js && node scrapers/4_score_and_load.js --region=6725",
     "build": "npm rebuild sqlite3 --build-from-source"
   },
   "keywords": [

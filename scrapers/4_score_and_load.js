@@ -16,22 +16,33 @@
 const fs = require('fs');
 const path = require('path');
 const sqlite3 = require('sqlite3').verbose();
-const { paths, OSM_TAG_RULES, NAME_KEYWORD_RULES, EXCLUSION_KEYWORDS } = require('./config');
+const { paths, OSM_TAG_RULES, TOURISM_TAG_RULES, NAME_KEYWORD_RULES, TOURISM_KEYWORD_RULES, EXCLUSION_KEYWORDS, REGIONS } = require('./config');
 const { evaluate } = require('../lib/eligibility');
 
 const dbPath = path.join(__dirname, '../data/88days.db');
 
+// Detect which region/mode we're loading from the raw candidates metadata.
+// Candidates store discovered_tile = regionArg (e.g. "6701") or "pilot".
+const regionArg = (process.argv.find((a) => a.startsWith('--region=')) || '').replace('--region=', '');
+const activeRegion = regionArg ? REGIONS[regionArg] : REGIONS.pilot;
+const isTourism = activeRegion?.mode === 'tourism';
+const activeTagRules = isTourism ? TOURISM_TAG_RULES : OSM_TAG_RULES;
+const activeKeywordRules = isTourism ? TOURISM_KEYWORD_RULES : NAME_KEYWORD_RULES;
+
 /** Pick category from OSM tags (first matching rule). */
 function categoryFromTags(tags) {
-  for (const rule of OSM_TAG_RULES) {
+  for (const rule of activeTagRules) {
     const [k, v] = Object.entries(rule.match)[0];
     if (tags[k] === v) return { id: rule.category_id, name: rule.category_name };
   }
   return { id: null, name: null };
 }
 
-/** Check if a business name matches exclusion keywords (secondary processing). */
+/** Check if a business name matches exclusion keywords (secondary processing).
+ *  ONLY applied in agriculture mode — tourism businesses like "The Mill Restaurant"
+ *  are legitimate and must not be filtered by secondary-processing keywords. */
 function isExcluded(name) {
+  if (isTourism) return null; // never exclude tourism candidates by name
   const lower = (name || '').toLowerCase();
   for (const keyword of EXCLUSION_KEYWORDS) {
     if (lower.includes(keyword)) return keyword;
@@ -42,7 +53,7 @@ function isExcluded(name) {
 /** Refine category by name keywords (overrides tag default on hit). */
 function refineByName(name, fallback) {
   const lower = (name || '').toLowerCase();
-  for (const rule of NAME_KEYWORD_RULES) {
+  for (const rule of activeKeywordRules) {
     if (rule.keywords.some((kw) => lower.includes(kw))) {
       return { id: rule.category_id, name: rule.category_name };
     }
@@ -57,6 +68,13 @@ const WORK_TYPES = {
   3: 'Vegetable harvesting, planting, packing',
   4: 'Livestock handling, mustering, general farm hand',
   5: 'Nursery work, potting, propagation, greenhouse',
+  6: 'Mining operations, drilling, processing support',
+  7: 'Fishing, pearling, aquaculture operations',
+  8: 'Construction, site preparation, landscaping',
+  9: 'Chef, hotel/hostel staff, dive instructor, tour guide, bartender, housekeeper',
+  10: 'Disaster recovery, cleanup, demolition, reconstruction',
+  11: 'Agricultural processing, packing, grading',
+  12: 'Cotton picking and harvesting',
 };
 
 function scoreCandidate(c) {
